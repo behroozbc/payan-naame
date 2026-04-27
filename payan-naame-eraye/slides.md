@@ -225,24 +225,35 @@ GatherSymbols-->GetUserKnowledgeStatus
 ## Demo
 >Q: What is an AI agent?
 <br>
+Based on the technical context of the documents you provided, it is important to note that the text focuses on formal logic, mathematical linguistics, and Description Logics (DL) rather than "AI Agents" in the modern sense of LLM-based autonomous agents.
 
->A: An AI agent is a software program that performs tasks and makes decisions on its own, using artificial intelligence (AI) techniques to interact with its environment and achieve specific goals.
-There are several types of AI agents, including:
-Goal-based agents: These agents have a set of goals or objectives that they try to achieve. They use reasoning and planning to determine the best course of action to reach their goals.
-Utility-based agents: These agents evaluate actions based on their expected utility or reward. They choose the action with the highest expected utility, which is often calculated using a utility function.
-Model-based agents: These agents have an internal model of the world and use it to reason about the consequences of their actions. They can plan and predict the outcomes of different actions.
-Some key characteristics of AI agents include:
-Perception: The ability to sense and understand the environment, including perceiving inputs such as sensor data or user requests.
-Action: The ability to perform tasks and take actions in the environment, such as moving a robot arm or sending an email.
-Reasoning: The ability to draw conclusions and make decisions based on available information and knowledge.
-Learning: The ability to improve performance over time through experience and adaptation.
-AI agents can be used in a wide range of applications, including:
-Robotics
-Virtual assistants (e.g. Siri, Alexa)
-Chatbots
-Recommendation systems
-Autonomous vehicles
-Overall, AI agents are an essential component of many modern AI systems, enabling them to interact with the world, make decisions, and achieve their goals.
+However, in the broader field of Computer Science and AI, an AI Agent can be defined as follows:
+
+### What is an AI Agent?
+An AI Agent is a system that perceives its environment, reasons about terms or goals, and takes actions to achieve a specific objective. Unlike a standard program that simply follows a linear script, an agent is designed to be autonomous.
+---
+
+#### 1. Core Components of an Agent
+*   Perception (Sensors): The agent gathers data from its environment (e.g., a chatbot reading terms of terms, a robot using a camera, or a trading bot monitoring stock prices).
+*   Reasoning (The "Brain"): The agent processes the data. This is where the logic described in your provided texts (like Description Logics or formal semantics) often fits in—providing the rules the agent uses to make decisions.
+*   Action (Actuators): The agent performs an operation to change the state of the environment (e.g., generating a response, moving a mechanical arm, or executing a trade).
+---
+
+#### 2. Types of AI Agents
+*   Simple Reflex Agents: Act based on a pre-defined set of "if-then" rules (e.g., a thermostat).
+*   Goal-Based Agents: Act to achieve a specific end-state, planning a sequence of actions to get there.
+*   Utility-Based Agents: Not only try to reach a goal but try to find the *most efficient* or "happiest" path to that goal.
+*   Learning Agents: Can improve their performance over time by observing the results of their actions.
+---
+
+#### 3. Connection to your provided texts
+The documents you shared discuss Description Logics and Formal Semantics. In the world of AI Agents, these are the foundations of Knowledge Representation. 
+
+For an agent to be "intelligent," it needs a way to represent the world. Description Logics allow an agent to:
+*   Define Concepts: (e.g., "A 'Manager' is a 'Person' who 'manages' a 'Project'").
+*   Perform Inference: If the agent knows that "Socrates is a Man" and "All Men are Mortal," the agent can *infer* that "Socrates is Mortal" without being explicitly told.
+
+In summary: While a standard AI (like a simple calculator) just processes a formula, an AI Agent uses a knowledge base (often built with the logic seen in your texts) to perceive a situation and act autonomously to solve a problem.
 ---
 
 ## Remaining Tasks
@@ -257,3 +268,5 @@ Overall, AI agents are an essential component of many modern AI systems, enablin
     - Fine-Tuning the model.
     - compare RAG results with new Results.
 </v-clicks>
+
+
