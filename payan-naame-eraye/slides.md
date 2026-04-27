@@ -133,6 +133,8 @@ It fully complies with the European Union's privacy laws.
 
 ### Create a small dataset of question
 
+<v-clicks>
+
 - Questions from AI2, AI1, and the SMAI content course are being added to a dataset.
 - The dataset currently contains roughly 20 questions.
 - In the coming weeks, more details and additional questions on these topics will be added.
@@ -140,6 +142,7 @@ It fully complies with the European Union's privacy laws.
 - The system is personalized for every person, which is why not all questions have fixed/standard answers.
 - The instructor can specify topics or elements to include (e.g., “include this topic”), but cannot dictate strict, uniform answers for everyone.
 
+</v-clicks>
 ---
 
 ### Indexing
