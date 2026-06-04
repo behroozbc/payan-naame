@@ -25,8 +25,9 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
+          working_directory: ketabche
           # نام فایل اصلی پایان‌نامه‌ات (معمولاً main.tex یا thesis.tex)
-          root_file: ketabche/main.tex
+          root_file: main.tex
           
           # اگر از XeLaTeX یا LuaLaTeX استفاده می‌کنی:
           # latexmk: true
