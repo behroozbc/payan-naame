@@ -26,7 +26,6 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: ketabche
-          # نام فایل اصلی پایان‌نامه‌ات (معمولاً main.tex یا thesis.tex)
           root_file: main.tex
           
           # اگر از XeLaTeX یا LuaLaTeX استفاده می‌کنی:
@@ -39,5 +38,5 @@ jobs:
         with:
           with:
           name: thesis-pdf
-          path: ketabche/main.pdf        # ← اینجا حتماً از / استفاده کن
+          path: ketabche/main.pdf 
           retention-days: 60
