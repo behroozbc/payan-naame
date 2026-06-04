@@ -1,0 +1,47 @@
+name: Compile LaTeX Thesis
+
+on:
+  push:
+    branches: [  master ]
+    paths:
+      - '**.tex'
+      - '**.bib'
+      - '**.cls'
+      - '**.sty'
+  pull_request:
+    branches: [  master ]
+  workflow_dispatch:  # دکمه Manual Run
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v4
+        with:
+          # نام فایل اصلی پایان‌نامه‌ات (معمولاً main.tex یا thesis.tex)
+          root_file: ketabche/main.tex
+          
+          # اگر از XeLaTeX یا LuaLaTeX استفاده می‌کنی:
+          # latexmk: true
+          # args: -xelatex -file-line-error -interaction=nonstopmode
+          
+          # اگر پکیج‌های خاصی نیاز داری (مثل فارسی)
+          extra_system_packages: |
+            texlive-lang-other
+            # fontconfig
+            # freetype
+
+      - name: Upload PDF as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis-pdf
+          path: main.pdf                 # نام PDF خروجی
+          retention-days: 30             # چند روز نگه داره
+          if-no-files-found: error
