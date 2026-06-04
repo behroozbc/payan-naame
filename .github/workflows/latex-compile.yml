@@ -33,12 +33,23 @@ jobs:
           # latexmk: true
           # args: -xelatex -file-line-error -interaction=nonstopmode
           
+      - name: List generated files (برای دیباگ)
+        run: ls -la ketabche/
+        working-directory: .
 
+      - name: Check if PDF exists
+        run: |
+          ls -la ketabche/
+          if [ -f ketabche/main.pdf ]; then
+            echo "✅ PDF successfully generated"
+          else
+            echo "❌ PDF not found!"
+          fi
 
       - name: Upload PDF as Artifact
         uses: actions/upload-artifact@v4
         with:
+          with:
           name: thesis-pdf
-          path: ketabche\main.pdf                 # نام PDF خروجی
-          retention-days: 30             # چند روز نگه داره
-          if-no-files-found: error
+          path: ketabche/main.pdf        # ← اینجا حتماً از / استفاده کن
+          retention-days: 60
