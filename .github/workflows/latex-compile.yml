@@ -38,6 +38,7 @@ jobs:
       - name: Upload PDF as Artifact
         uses: actions/upload-artifact@v4
         with:
+          working_directory: ketabche
           name: thesis-pdf
           path: main.pdf                 # نام PDF خروجی
           retention-days: 30             # چند روز نگه داره
