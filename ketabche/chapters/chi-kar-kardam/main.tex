@@ -3,10 +3,10 @@ In this section we go to the approach that this thesis tries to solve the proble
 \subsection{Dataset}
 The dataset used for this thesis is a mixed dataset from multiple sources, Mathhub and the Learner model.
 The course materials and the knowledge graph built from them are available on Mathhub. Every symbol on Mathhub has a URL and a content of it. 
-The Leaner model has the understanding level of every symbol in Mathhub in six dimensions\footnote{explian}. 
+The Leaner model has the understanding level of every symbol in Mathhub in six dimensions\footnote{explain}. 
 
-\usetikzlibrary {calc,positioning,shapes.misc}
-\tikzset{terminal/.style={rectangle,draw,inner sep=2pt}}
+
+
 \begin{tikzpicture}
   \node (leaner)   [terminal]                        {Learner Model};
   \node (symbols) [terminal,right=of leaner]           {Symbol(Topic)};
@@ -42,3 +42,4 @@ On this way I experiment with multi embedding models to see how it can change th
 The result indicated that the increasing the dimensions of the vector over 1000 can backfire 
 and yielding to poor result.
 
+\subsection{Text search}
