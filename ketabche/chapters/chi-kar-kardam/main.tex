@@ -1,11 +1,11 @@
 \section{What I did}
 In this section we go to the approach that this thesis tries to solve the problem.
 \subsection{Dataset}
-The dataset used for this thesis is a mixed dataset from multiple sources, Mathhub and the Learner model.
-The course materials and the knowledge graph built from them are available on Mathhub. Every symbol on Mathhub has a URL and a content of it. 
-The Leaner model has the understanding level of every symbol in Mathhub in six dimensions\footnote{explain}. 
-
-
+On this thesis we need to make own datasets to solve the problems.
+\subsubsection{Content and leaner profile dataset}
+A dataset used for this thesis is a mixed dataset from multiple sources, Mathhub and the Learner model.
+The course materials and the knowledge graph built from them are available on Mathhub. Every symbol on Mathhub has a URL and a content of it.
+The Leaner model has the Bloom’s Taxonomy every symbol in Mathhub.
 
 \begin{tikzpicture}
   \node (leaner)   [terminal]                        {Learner Model};
@@ -15,11 +15,16 @@ The Leaner model has the understanding level of every symbol in Mathhub in six d
   \node (definition) [terminal, below=of symbols] {Definition};
 
   \path (leaner)   edge[->]           (symbols)  % simple edges
-        (prerequestest) edge[->]           (symbols)
-        (symbols) edge[->] (explian)
-        (symbols) edge[->] (definition);
-        
+  (prerequestest) edge[->]           (symbols)
+  (symbols) edge[->] (explian)
+  (symbols) edge[->] (definition);
+
 \end{tikzpicture}
+
+\subsubsection{Question database}
+Another dataset which I created for this thesis is a list of question from students on the courses "AI-1/2" "SMAI".
+This dataset has over 70 questions about these courses. It used to test the model and Fine-tune it.
+
 
 % Upon constructing the dataset, the content from the URLs of MathHub
 % was extracted to build a vector database for querying and retrieving relevant results.
@@ -33,13 +38,22 @@ The Leaner model has the understanding level of every symbol in Mathhub in six d
 
 \subsection{Vector search}
 After constructing the dataset, we need to retrieve related information for our RAFT pipeline.
-By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.  
+By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
 Which the vector search functionality were necessary to enable semantic search over the content of MathHub.
 So we retrieved content from the URLs of the Mathhub and build the vector database to querying
-the content. 
+the content.
 
 On this way I experiment with multi embedding models to see how it can change the result of querying.
-The result indicated that the increasing the dimensions of the vector over 1000 can backfire 
+The result indicated that the increasing the dimensions of the vector over 1000 can backfire
 and yielding to poor result.
 
 \subsection{Text search}
+MathHub provides text search function, however the text search has a big problem. It is a pure text search
+which means only performs an exact string matching not a keyword finding from user query.
+On the other hand, the user asks questions which contain not saying a keyword to explain it.
+
+For example the user input is  "what is a NP hard problem means?" so the pure text search will retrieve not
+related content with low score because the text search need only the "NP hard" keyword.
+
+This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
+on extracted keyword.
