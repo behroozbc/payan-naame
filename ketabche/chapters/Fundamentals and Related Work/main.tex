@@ -1,10 +1,42 @@
 \section{Fundamentals and Related Work}
-\footnote{Alea??}, RAFT, RAG??
+In this chapter provides a comprehensive review of foundational technologies
+that underpin the present thesis. 
 \\
-MathHub.info is a portal for active mathematical documents and an archive for flexiformal mathematics, developed at the Friedrich‑Alexander‑University Erlangen‑Nürnberg by the KWARC group.
+RAFT, RAG??
+\\
+\subsection{Mathhub}
+MathHub.info is a portal for active mathematical documents and an archive for flexiformal mathematics,
+developed at the Friedrich Alexander University Erlangen‑Nürnberg by the KWARC group.
 It offers a rich interface for reading, writing, and interacting with mathematical documents and knowledge, as well as a comprehensive API for accessing both knowledge and documents.
 In this thesis, we employ it as the knowledge provider. Symbols, definitions, prerequisites, and the connections between concepts are stored in a graph database, which can be queried using SPARQL via the provided API.
 
-Leaner Model is a system that try to predict the six level of understanding for a symbol.
-It changed by user interacting with it  as answering to questions.
-It is totally personal and act on EU AI law
+\subsection{ALeA: an Adaptive Learning Assistant}
+% The alias system is umm adaptive The alias system is a system that build from multi components of the V and and to gather together to make a good tools for a student to learn and find their leg in the note alia means an adaptive learning assistant which be a tool that uses knowledge graph course contents of that knowledge graph and the learner model and things together to build tools for student the audio system a student can access Internet access the course content and see how the course works and they they can do the preparation question for preparing for the quiz. Are your system has good tools that is learning model learning model is a model of model to map the data from the student knowledge base and find how student understand topics and how the level of understanding of each topic is for every student This is a very good tools and the learner model provides us a basic tool for understanding the value and all of these the ALIA model works as EU law of their privacy.
+The Adaptive Learning Assistant (ALeA) constitutes a semantically driven platform
+designed to support personalized education.  Building upon the knowledge‑graph
+infrastructure of Mathhub, ALeA integrates three
+inter‑related modules:
+\begin{enumerate}
+    \item \textbf{Semantic Knowledge Base}:  Lecture materials are transformed
+          into a hierarchically organized graph of concepts through semantic
+          annotation.  This representation makes explicit the prerequisite
+          relationships among topics, thereby enabling precise identification of
+          the knowledge components that a learner must master before progressing
+          to more advanced material.
+    \item \textbf{Learner Model}:   Interaction data (e.g. quiz
+          responses, and practice problem) are continuously harvested from
+          students using the system.  The model maps these data onto the semantic
+          graph, producing a probabilistic estimate of each learner’s mastery of
+          individual concepts and of the overall curriculum. 
+          This is the most important part of ALeA system for this thesis.
+    \item \textbf{Adaptive Engine}:  By coupling the learner model with the
+          semantic knowledge base, the adaptive engine generates customized
+          learning pathways, selects appropriate practice items, and delivers
+          real‑time feedback\footnote{Green yellow red light}.  It also recommends prerequisite content when a
+          knowledge gap is detected, thus scaffolding the student’s learning
+          experience.
+\end{enumerate}
+Through this triadic architecture, ALeA offers a coherent environment in which
+semantic knowledge representation, dynamic learner modelling, and adaptive
+instruction converge to enhance both teaching efficacy and student outcomes.
+
