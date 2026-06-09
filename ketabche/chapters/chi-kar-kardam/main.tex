@@ -10,12 +10,12 @@ The Leaner model has the Bloom’s Taxonomy every symbol in Mathhub.
 \begin{tikzpicture}
   \node (leaner)   [terminal]                        {Learner Model};
   \node (symbols) [terminal,right=of leaner]           {Symbol(Topic)};
-  \node (prerequestest)     [terminal,right=of symbols]         {Prerequisites(symbol)};
+  \node (Prerequisites)     [terminal,right=of symbols]         {Prerequisites(symbol)};
   \node (explian) [terminal, above=of symbols] {Explain};
   \node (definition) [terminal, below=of symbols] {Definition};
 
   \path (leaner)   edge[->]           (symbols)  % simple edges
-  (prerequestest) edge[->]           (symbols)
+  (Prerequisites) edge[->]           (symbols)
   (symbols) edge[->] (explian)
   (symbols) edge[->] (definition);
 
@@ -68,3 +68,8 @@ related content with low score because the text search need only the "NP hard" k
 
 This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
 on extracted keyword.
+
+\subsection{Fetching prerequisites}
+
+Every item retrieved from search has mapped to specific prerequisites by the Mathhub knowledge base. We fetch the 
+prerequisites and the content of it for building the prompt.
