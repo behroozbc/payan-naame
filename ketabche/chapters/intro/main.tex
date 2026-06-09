@@ -9,10 +9,25 @@ In every time, with the change of technology the methods of learning changes too
 In recent years, with introducing of Large Language Models (LLMs)\cite{brown2020languagemodelsfewshotlearners}, such as ChatGPT, has fundamentally transformed educational landscapes by providing students with an immediately accessible platform for knowledge acquisition and conceptual exploration.
 
 However, the inherently "one-size-fits-all" architecture of these general-purpose models introduces significant pedagogical risks in real-world academic environments.
-Learner profiles, prior knowledge, and cognitive baselines are highly individualized, yet LLMs typically deliver standardized outputs that fail to adapt to diverse learning styles, cultural contexts, or varying levels of academic preparation. 
-Furthermore, these models lack the necessary adaptability to align with specific curricula, often overlooking niche subject matter, specialized terminology, or institution-specific course materials that fall outside their pretraining scope or contextual limits. 
-This limitation is particularly critical given the high-stakes nature of education, where academic assessments and grades can profoundly shape an individual’s career trajectory and long-term opportunities. In this context, the well-documented propensity of LLMs to generate plausible but factually incorrect information ("hallucinations") is fundamentally unacceptable. 
+Learner profiles, prior knowledge, and cognitive baselines are highly individualized, yet LLMs typically deliver standardized outputs that fail to adapt to diverse learning styles, cultural contexts, or varying levels of academic preparation.
+Furthermore, these models lack the necessary adaptability to align with specific curricula, often overlooking niche subject, specialized terminology, or institution-specific course materials that fall outside their pretraining scope or contextual limits.
+This limitation is particularly critical given the high-stakes nature of education, where academic assessments and grades can profoundly shape an individual’s career trajectory and long-term opportunities. In this context, the well-documented propensity of LLMs to generate plausible but factually incorrect information ("hallucinations") is fundamentally unacceptable.
 % Consequently, addressing these gaps through pedagogical alignment, domain-specific fine-tuning, and robust verification mechanisms is essential for the responsible, equitable, and effective integration of LLMs into modern academia.
+
+In last the paragraph we mentioned the problems of using LLMs, let's see in details.
+\begin{enumerate}
+    \item Hallucinations
+    \item Learner profiles, prior knowledge, and cognitive baselines are highly individualized
+    \item diverse learning styles, cultural contexts, or varying levels of academic preparation
+\end{enumerate}
+
+So these problems can use the resulting issues,
+\begin{enumerate}
+    \item Answers may include inaccuracies.
+    \item Some explanations may be irrelevant or missing.
+    \item Answers may ignore details the instructor has already explained.
+    \item Responses can sometimes contain hallucinations.
+\end{enumerate}
 
 \subsection{Research Questions}
 
@@ -20,20 +35,19 @@ The primary objective of this thesis is to develop an intelligent tutoring syste
 
 \begin{itemize}
     \item How can the system dynamically adapt its responses to align with a student's current knowledge level and learning progress?
-    
+
     \item How can course-specific content and pedagogical materials be effectively integrated to ensure domain-relevant and accurate responses?
-    
+
     \item What techniques and architectural strategies can be employed to effectively reduce hallucinations in large language model-based tutoring systems?
-    
+
     \item How can the system generate more accurate, context-aware, and educationally valuable answers that support meaningful learning?
 \end{itemize}
 
 \subsection{Contribution}
 
-\large{A RAG pipline}
-\\
-\large{trying with an embedding}
-\\
-\large{A fine-tuned model for answering students question}
-\\
-\large{ TriprtieRAG \footnote{pri}}
+\begin{enumerate}
+    \item A RAG pipeline
+    \item trying with an embedding
+    \item A fine-tuned model for answering students question
+    \item  TriprtieRAG \footnote{pri}
+\end{enumerate}
