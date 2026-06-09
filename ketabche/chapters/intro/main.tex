@@ -6,18 +6,43 @@ In every time, with the change of technology the methods of learning changes too
 
 
 
-In recent years, with introducing of Large Language Models (LLMs)\cite{brown2020languagemodelsfewshotlearners}, such as ChatGPT, has fundamentally transformed educational landscapes by providing students with an immediately accessible platform for knowledge acquisition and conceptual exploration.
+In recent years, with introducing of Large Language Models (LLMs)\cite{brown2020languagemodelsfewshotlearners},
+such as ChatGPT, has fundamentally transformed educational landscapes by providing students with an immediately
+accessible platform for knowledge acquisition and conceptual exploration.
 
-However, the inherently "one-size-fits-all" architecture of these general-purpose models introduces significant pedagogical risks in real-world academic environments.
-Learner profiles, prior knowledge, and cognitive baselines are highly individualized, yet LLMs typically deliver standardized outputs that fail to adapt to diverse learning styles, cultural contexts, or varying levels of academic preparation.
-Furthermore, these models lack the necessary adaptability to align with specific curricula, often overlooking niche subject, specialized terminology, or institution-specific course materials that fall outside their pretraining scope or contextual limits.
-This limitation is particularly critical given the high-stakes nature of education, where academic assessments and grades can profoundly shape an individual’s career trajectory and long-term opportunities. In this context, the well-documented propensity of LLMs to generate plausible but factually incorrect information ("hallucinations") is fundamentally unacceptable.
+However, the inherently "one-size-fits-all" architecture of these general-purpose models introduces significant
+pedagogical risks in real-world academic environments.
+Learner profiles, prior knowledge, and cognitive baselines are highly individualized, yet LLMs typically deliver
+standardized outputs that fail to adapt to diverse learning styles, cultural contexts, or varying levels
+of academic preparation.
+Furthermore, these models lack the necessary adaptability to align with specific curricula, often overlooking
+niche subject, specialized terminology, or institution-specific course materials that fall outside their pretraining
+scope or contextual limits.
+This limitation is particularly critical given the high-stakes nature of education, where academic assessments and
+grades can profoundly shape an individual’s career trajectory and long-term opportunities. In this context,
+the well-documented propensity of LLMs to generate plausible but factually incorrect information ("hallucinations")
+is fundamentally unacceptable.
 % Consequently, addressing these gaps through pedagogical alignment, domain-specific fine-tuning, and robust verification mechanisms is essential for the responsible, equitable, and effective integration of LLMs into modern academia.
 
-In last the paragraph we mentioned the problems of using LLMs, let's see in details.
+In the last paragraph, the core problems of using general purpose LLMs were mentioned,
+let's see in details these limitations.
 \begin{enumerate}
-    \item Hallucinations
-    \item Learner profiles, prior knowledge, and cognitive baselines are highly individualized
+    \item Hallucinations are a big problem and challenge in using LLMs. These model may produce
+          responses that appear coherent and rational but contains inaccurate information. So using
+          them in education can be a risk for students.
+    \item Each individual possesses a unique scientific background. Some have cultivated greater
+          expertise in scientific practices, while others have specialized more deeply in theoretical
+          domains. One person may be familiar with numerous concepts that another has never
+          encountered. Collectively, these variations underscore the necessity for language
+          models to adapt their responses and generate personalized answers tailored to
+          the specific needs and prior knowledge of each user.
+          To illustrate, consider a student majoring in literature who encounters a question
+          concerning artificial intelligence agents. In this scenario, the language model should
+          provide clear explanations of foundational concepts related to computer science,
+          artificial intelligence, and associated topics, thereby bridging the knowledge gap
+          for this learner. By contrast, the same query posed by an undergraduate student in
+          computer science would require a markedly different level of depth and technical detail.
+          Moreover, such differences need not be confined to interdisciplinary contexts; they can be considerably more nuanced. Two students within the same academic discipline may still exhibit substantially divergent scientific backgrounds, owing to factors such as varying levels of attention and engagement with specific courses—one having studied a particular class more diligently while the other has not.
     \item diverse learning styles, cultural contexts, or varying levels of academic preparation
 \end{enumerate}
 
