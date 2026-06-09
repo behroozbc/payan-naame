@@ -35,8 +35,9 @@ This dataset has over 70 questions about these courses. It used to test the mode
 
 % We need the data and vector search for and searching on the content of the math hop math hop by default provide a good text search base but it does not contain vector search so we built a vector search from the content of the math hub with the condition that we store the URI and the content of every and after be try the multi embedding model to see how embedding better embedding get better result in the content of the math hub and the result is when you increase the embedding dimension over 1000 vector dim the result become very bad but in less than 1000 the result is good and you can search with the good result
 % After that we used I am waiting for the tracking process and thinking how we can use it for an hour simple rag pipeline before applying the other things
-
-\subsection{Vector search}
+\subsection{Search}
+In the thesis we use two type search for getting better results, vector search and string match search. 
+\subsubsection{Vector search}
 After constructing the dataset, we need to retrieve related information for our RAFT pipeline.
 By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
 Which the vector search functionality were necessary to enable semantic search over the content of MathHub.
@@ -47,7 +48,7 @@ On this way I experiment with multi embedding models to see how it can change th
 The result indicated that the increasing the dimensions of the vector over 1000 can backfire
 and yielding to poor result.
 
-\subsection{Text search}
+\subsubsection{String match search}
 MathHub provides text search function, however the text search has a big problem. It is a pure text search
 which means only performs an exact string matching not a keyword finding from user query.
 On the other hand, the user asks questions which contain not saying a keyword to explain it.
@@ -57,3 +58,5 @@ related content with low score because the text search need only the "NP hard" k
 
 This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
 on extracted keyword.
+
+\subsection{RAG pipeline}
