@@ -5,7 +5,8 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "build-gh": "slidev build --base /payan-naame/"
   },
   "dependencies": {
     "@slidev/cli": "^52.14.2",
