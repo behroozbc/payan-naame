@@ -45,7 +45,7 @@ in this section we go into these sections and explain the reasons of every choic
 \subsection{Search}
 A text search has a big role in RAG pipeline because finding a good content and provide them to LLM make the result
 very consistent, and with fewer hallucinations. 
-In the thesis we use two type search for getting better results, vector search and string match search. 
+In the thesis we use two type search for getting better results, vector search and Lexical Search. 
 Combining these two methods results provide us a hybrid method which have goods of two methods alone.
 \subsubsection{Vector search}
 After constructing the dataset, we need to retrieve related information for our RAFT pipeline.
@@ -58,7 +58,7 @@ On this way I experiment with multi embedding models to see how it can change th
 The result indicated that the increasing the dimensions of the vector over 1000 can backfire
 and yielding to poor result.
 
-\subsubsection{String match search}
+\subsubsection{Lexical Search}
 MathHub provides text search function, however the text search has a big problem. It is a pure text search
 which means only performs an exact string matching not a keyword finding from user query.
 On the other hand, the user asks questions which contain not saying a keyword to explain it.
@@ -69,7 +69,9 @@ related content with low score because the text search need only the "NP hard" k
 This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
 on extracted keyword.
 
-\subsection{Fetching prerequisites}
+\subsection{Gather prerequisites}
 
-Every item retrieved from search has mapped to specific prerequisites by the Mathhub knowledge base. We fetch the 
+Every item retrieved from the search has mapped to specific prerequisites by the Mathhub knowledge base. We fetch the 
 prerequisites and the content of it for building the prompt.
+
+\subsection{Gather Symbols}
