@@ -1,0 +1,24 @@
+\section{Dataset}
+On this thesis we need to make own datasets to solve the problems.
+\subsection{Content and leaner profile dataset}
+A dataset used for this thesis is a mixed dataset from multiple sources, Mathhub and the Learner model.
+The course materials and the knowledge graph built from them are available on Mathhub. Every symbol on Mathhub has a URL and a content of it.
+The Leaner model has the Bloom’s Taxonomy every symbol in Mathhub.
+
+\begin{tikzpicture}
+  \node (leaner)   [terminal]                        {Learner Model};
+  \node (symbols) [terminal,right=of leaner]           {Symbol(Topic)};
+  \node (Prerequisites)     [terminal,right=of symbols]         {Prerequisites(symbol)};
+  \node (explian) [terminal, above=of symbols] {Explain};
+  \node (definition) [terminal, below=of symbols] {Definition};
+
+  \path (leaner)   edge[->]           (symbols)  % simple edges
+  (Prerequisites) edge[->]           (symbols)
+  (symbols) edge[->] (explian)
+  (symbols) edge[->] (definition);
+
+\end{tikzpicture}
+
+\subsection{Question database}
+Another dataset which I created for this thesis is a list of question from students on the courses "AI-1/2" "SMAI".
+This dataset has over 70 questions about these courses. It used to test the model and Fine-tune it.

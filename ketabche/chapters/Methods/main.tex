@@ -1,31 +1,7 @@
 \chapter{Methods}
 In this section we go to the approach that this thesis tries to solve the problem.
-\section{Dataset}
-On this thesis we need to make own datasets to solve the problems.
-\subsection{Content and leaner profile dataset}
-A dataset used for this thesis is a mixed dataset from multiple sources, Mathhub and the Learner model.
-The course materials and the knowledge graph built from them are available on Mathhub. Every symbol on Mathhub has a URL and a content of it.
-The Leaner model has the Bloom’s Taxonomy every symbol in Mathhub.
 
-\begin{tikzpicture}
-  \node (leaner)   [terminal]                        {Learner Model};
-  \node (symbols) [terminal,right=of leaner]           {Symbol(Topic)};
-  \node (Prerequisites)     [terminal,right=of symbols]         {Prerequisites(symbol)};
-  \node (explian) [terminal, above=of symbols] {Explain};
-  \node (definition) [terminal, below=of symbols] {Definition};
-
-  \path (leaner)   edge[->]           (symbols)  % simple edges
-  (Prerequisites) edge[->]           (symbols)
-  (symbols) edge[->] (explian)
-  (symbols) edge[->] (definition);
-
-\end{tikzpicture}
-
-\subsection{Question database}
-Another dataset which I created for this thesis is a list of question from students on the courses "AI-1/2" "SMAI".
-This dataset has over 70 questions about these courses. It used to test the model and Fine-tune it.
-
-
+\input{chapters/Methods/section/dataset.tex}
 % Upon constructing the dataset, the content from the URLs of MathHub
 % was extracted to build a vector database for querying and retrieving relevant results.
 
@@ -37,41 +13,4 @@ This dataset has over 70 questions about these courses. It used to test the mode
 % After that we used I am waiting for the tracking process and thinking how we can use it for an hour simple rag pipeline before applying the other things
 
 
-\section{RAG pipeline}
-
-The RAG pipeline has built by some component such as Search, prompt builder, and....
-in this section we go into these sections and explain the reasons of every choice made. 
-
-\subsection{Search}
-A text search has a big role in RAG pipeline because finding a good content and provide them to LLM make the result
-very consistent, and with fewer hallucinations. 
-In the thesis we use two type search for getting better results, vector search and Lexical Search. 
-Combining these two methods results provide us a hybrid method which have goods of two methods alone.
-\subsubsection{Vector search}
-After constructing the dataset, we need to retrieve related information for our RAFT pipeline.
-By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
-Which the vector search functionality were necessary to enable semantic search over the content of MathHub.
-So we retrieved content from the URLs of the Mathhub and build the vector database to querying
-the content.
-
-On this way I experiment with multi embedding models to see how it can change the result of querying.
-The result indicated that the increasing the dimensions of the vector over 1000 can backfire
-and yielding to poor result.
-
-\subsubsection{Lexical Search}
-MathHub provides text search function, however the text search has a big problem. It is a pure text search
-which means only performs an exact string matching not a keyword finding from user query.
-On the other hand, the user asks questions which contain not saying a keyword to explain it.
-
-For example the user input is  "what is a NP hard problem means?" so the pure text search will retrieve not
-related content with low score because the text search need only the "NP hard" keyword.
-
-This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
-on extracted keyword.
-
-\subsection{Gather prerequisites}
-
-Every item retrieved from the search has mapped to specific prerequisites by the Mathhub knowledge base. We fetch the 
-prerequisites and the content of it for building the prompt.
-
-\subsection{Gather Symbols}
+\input{chapters/Methods/section/rag-pipeline.tex}
