@@ -1,0 +1,3 @@
+[submodule "ketabche/kwarc.bib"]
+	path = ketabche/kwarc.bib
+	url = https://github.com/KWARC/bibs

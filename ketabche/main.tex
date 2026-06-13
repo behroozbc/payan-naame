@@ -10,6 +10,9 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{tabularx}
+\usepackage{biblatex}
+\addbibresource{kwarc.bib/kwarc.bib}
+\addbibresource{references.bib}
 \usepackage[bookmarksnumbered,bookmarksopen,colorlinks,urlcolor=gray,linkcolor=blue,citecolor=blue]{hyperref}
 \usetikzlibrary {calc,positioning,shapes.misc}
 \tikzset{terminal/.style={rectangle,draw,inner sep=2pt}}
@@ -33,8 +36,9 @@
 \input{chapters/Evaluation/main.tex}
 \input{chapters/Conclusion/main.tex}
 \input{chapters/Declaration/main.tex}
-\bibliographystyle{abbrv}
+\printbibliography
+
 \small
-\bibliography{references}
+
 % \theendnotes
 \end{document}
