@@ -1,0 +1,30 @@
+\usepackage{pbox}
+
+
+% DOCUMENT VARIABLES
+% ##################################################
+% Personal data
+\newcommand{\docAuthor}{XXXX YYYY}
+\newcommand{\docMatriculationNumber}{23204925}
+\newcommand{\docStudyProgram}{XXXX}
+\newcommand{\docStreetName}{}
+\newcommand{\docPostalCode}{XXXXX}
+\newcommand{\docCity}{Erlangen}
+\newcommand{\docEmail}{}
+
+% Document data
+\newcommand{\docTitle}{Tripartite RAG}
+\newcommand{\docSubTitle}{}     % leave empty to remove
+\newcommand{\docType}{Master Thesis}
+\newcommand{\docSupervisor}{XXXX}
+\newcommand{\docSecondSupervisor}{XXXX}
+\newcommand{\docCoSupervisor}{XXXX}
+\newcommand{\docDeadline}{XXXX}
+
+% insert monthly report pdf as picture in order to keep page header
+\newcommand{\monthlyreport}[2]{
+    \section{#1}
+    \centering
+    \includegraphics[trim=55 35 55 35,clip,width=1\textwidth]{#2}
+    \clearpage
+}

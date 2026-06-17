@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[fontsize=12pt,paper=a4]{book}
 \usepackage{geometry}
 \usepackage{endnotes}
 % \renewcommand{\footnote}[1]{}
@@ -16,7 +16,7 @@
 \usepackage[bookmarksnumbered,bookmarksopen,colorlinks,urlcolor=gray,linkcolor=blue,citecolor=blue]{hyperref}
 \usetikzlibrary {calc,positioning,shapes.misc}
 \tikzset{terminal/.style={rectangle,draw,inner sep=2pt}}
-
+\input{preamble}   
 \begin{document}
 
 \title{TriprtieRAFT}
@@ -36,9 +36,9 @@
 \input{chapters/Evaluation/main.tex}
 \input{chapters/Conclusion/main.tex}
 \input{chapters/Declaration/main.tex}
-\printbibliography
 
-\small
+\printbibliography
+\include{chapters/Declaration of authorship/main.tex}
 
 % \theendnotes
 \end{document}
