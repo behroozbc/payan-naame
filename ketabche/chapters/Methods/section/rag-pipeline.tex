@@ -1,38 +1,36 @@
-\section{RAG pipeline}
+\section{RAG Pipeline}
 
-The RAG pipeline has built by some component such as Search, prompt builder, and....
-in this section we go into these sections and explain the reasons of every choice made. 
+The RAG pipeline is built from several components, such as search, prompt builder, and others.
+In this section, we examine each design choice and explain the rationale behind it.
 
 \subsection{Search}
-A text search has a big role in RAG pipeline because finding a good content and provide them to LLM make the result
-very consistent, and with fewer hallucinations. 
-In the thesis we use two type search for getting better results, vector search and Lexical Search. 
-Combining these two methods results provide us a hybrid method which have goods of two methods alone.
-\subsubsection{Vector search}
-After constructing the dataset, we need to retrieve related information for our RAFT pipeline.
-By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
-Which the vector search functionality were necessary to enable semantic search over the content of MathHub.
-So we retrieved content from the URLs of the Mathhub and build the vector database to querying
-the content.
+Text search plays a critical role in the RAG pipeline because retrieving relevant content and providing it to the LLM improves result consistency and reduces hallucinations.
+In this thesis, we employ two types of search to achieve better results: vector search and lexical search.
+Combining these two methods yields a hybrid approach that leverages the strengths of both.
 
-On this way I experiment with multi embedding models to see how it can change the result of querying.
-The result indicated that the increasing the dimensions of the vector over 1000 can backfire
-and yielding to poor result.
+\subsubsection{Vector Search}
+After constructing the dataset, we need to retrieve relevant information for our RAG pipeline.
+By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
+Therefore, vector search functionality was necessary to enable semantic search over the content of MathHub.
+We retrieved content from the URLs of MathHub and built a vector database for querying this content.
+
+In this approach, we experimented with various embedding models to observe their impact on query results.
+The results indicated that increasing the embedding dimensions beyond 1,000 can be counterproductive, yielding poor results.
 
 \subsubsection{Lexical Search}
-MathHub provides text search function, however the text search has a big problem. It is a pure text search
-which means only performs an exact string matching not a keyword finding from user query.
-On the other hand, the user asks questions which contain not saying a keyword to explain it.
+MathHub provides a text search function; however, this approach has a significant limitation. It performs pure text search,
+meaning it only executes exact string matching rather than identifying keywords from a user query.
+Furthermore, users tend to ask questions that describe a concept rather than using specific keywords.
 
-For example the user input is  "what is a NP hard problem means?" so the pure text search will retrieve not
-related content with low score because the text search need only the "NP hard" keyword.
+For example, if the user input is ``What does an NP-hard problem mean?'' the pure text search will retrieve
+unrelated content with low relevance scores because it requires the exact phrase ``NP-hard'' to appear in the results.
 
-This problem motivated me to develop a keyword extractor mechanism from the user input and apply the text search
-on extracted keyword.
+This limitation motivated us to develop a keyword extraction mechanism from the user input and apply the text search
+on the extracted keywords.
 
-\subsection{Gather prerequisites}
+\subsection{Gather Prerequisites}
 
-Every item retrieved from the search has mapped to specific prerequisites by the Mathhub knowledge base. We fetch the 
-prerequisites and the content of it for building the prompt.
+Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. We fetch the
+prerequisites and their content for inclusion in the prompt.
 
 \subsection{Gather Symbols}

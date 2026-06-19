@@ -1,12 +1,12 @@
 \chapter{Introduction}
 \section{Motivation}
-Expelling and understanding topics has a big role in our society from the beginning of history.
-Which make it a big challenge in until now.
-In every time, with the change of technology the methods of learning changes too.
+Explaining and understanding topics has played a significant role in society throughout history.
+This has remained a substantial challenge to the present day.
+Throughout history, as technology has evolved, so too have methods of learning.
 
 
 
-In recent years, with introducing of Large Language Models (LLMs)\cite{brown2020languagemodelsfewshotlearners},
+In recent years, the introduction of Large Language Models (LLMs)\cite{brown2020languagemodelsfewshotlearners},
 such as ChatGPT, has fundamentally transformed educational landscapes by providing students with an immediately
 accessible platform for knowledge acquisition and conceptual exploration.
 
@@ -16,20 +16,20 @@ Learner profiles, prior knowledge, and cognitive baselines are highly individual
 standardized outputs that fail to adapt to diverse learning styles, cultural contexts, or varying levels
 of academic preparation.
 Furthermore, these models lack the necessary adaptability to align with specific curricula, often overlooking
-niche subject, specialized terminology, or institution-specific course materials that fall outside their pretraining
+niche subjects, specialized terminology, or institution-specific course materials that fall outside their pretraining
 scope or contextual limits.
-This limitation is particularly critical given the high-risks nature of education, where academic assessments and
+This limitation is particularly critical given the high-stakes nature of education, where academic assessments and
 grades can profoundly shape an individual’s career trajectory and long-term opportunities. Moreover,
 the well-documented propensity of LLMs to generate plausible but factually incorrect information ("hallucinations")
 is fundamentally unacceptable.
 % Consequently, addressing these gaps through pedagogical alignment, domain-specific fine-tuning, and robust verification mechanisms is essential for the responsible, equitable, and effective integration of LLMs into modern academia.
 \section{Problems}
-In the last paragraph, the core limitations of using general purpose LLMs were mentioned,
-let's see in details these limitations.
+In the previous paragraph, the core limitations of using general-purpose LLMs were mentioned;
+we now examine these limitations in detail.
 \begin{itemize}
-    \item Hallucinations are a big problem and challenge in using LLMs. These model may produce
-          responses that appear coherent and rational but contains inaccurate information. So using
-          them in education can be a risk for students.
+    \item Hallucinations are a significant problem and challenge in using LLMs. These models may produce
+          responses that appear coherent and rational but contain inaccurate information. Therefore, using
+          them in education can pose a risk for students.
     \item Each individual possesses a unique scientific background. Some have cultivated greater
           expertise in scientific practices, while others have specialized more deeply in theoretical
           domains. One person may be familiar with numerous concepts that another has never
@@ -71,10 +71,10 @@ of such systems in supporting student learning:
     \item Responses can sometimes contain hallucinations—plausible yet factually incorrect
           information—which poses a particular risk in high-stakes educational contexts where
           students may internalize erroneous concepts without critical scrutiny.
-    \item Model missed the pre requirements knowledge explanation and filling the background.
-          The model does not know what is the pre requirements knowledge gaps of students and
-          try to explain the general pre requirements which mostly is inaccurate for every
-          person.
+    \item The model fails to identify and explain prerequisite knowledge and fill background gaps.
+          It does not determine the prerequisite knowledge gaps of students and
+          attempts to explain general prerequisites, which are often inaccurate for any given
+          individual.
 \end{itemize}
 
 These limitations collectively highlight the inadequacy of generic LLMs for nuanced pedagogical support. Without mechanisms for personalization, curricular alignment, and factual grounding, their deployment risks not only diminishing learning outcomes but also eroding trust in AI-assisted education. Addressing these challenges necessitates the development of more sophisticated, context-aware AI systems capable of adapting to individual learners, specific course content, and institutional requirements.
@@ -83,9 +83,11 @@ These limitations collectively highlight the inadequacy of generic LLMs for nuan
 
 \section{Contribution}
 
+The main contributions of this thesis are as follows:
+
 \begin{enumerate}
-    \item A RAG pipeline
-    \item trying with an embedding
-    \item A fine-tuned model for answering students question
-    \item  TriprtieRAG \footnote{pri}
+    \item We design and implement a Retrieval-Augmented Generation (RAG) pipeline tailored for educational applications.
+    \item We experiment with various embedding models and analyze the impact of embedding dimensions on retrieval quality.
+    \item We fine-tune a language model for answering student questions in a domain-specific context.
+    \item We propose TriprtieRAG\footnote{pri}, a novel approach that combines the above techniques.
 \end{enumerate}
