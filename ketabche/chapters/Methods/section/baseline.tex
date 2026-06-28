@@ -1,0 +1,22 @@
+\section{Baseline}
+The baseline for this thesis is two method. The first method only asks the question from LLM. This method is for see how much LLM knows about question pre default without any help.
+The prompt of it.\\
+\begin{quote}
+        You are a question-answering model for students. Please provide answers that are easy for students to understand. Use all material provided in the context.
+    I provide the user's status regarding some prerequisites of the topic. If the user does not know some prerequisites, cover them before explaining the question to the user.
+    Answer in an academic tone.
+        User query:
+        \{query\}
+\end{quote}
+
+The second method is providing the context to the LLM, it is very simple RAG which get the result of search pipeline from next section. 
+We put this to see how much LLM answer change only by providing besic context. This method big lack is the answer is "one-size-fits-all" (RQ1) but it has RQ2
+\begin{quote}
+    You are a question-answering model for students. Please provide answers that are easy for students to understand. Use all material provided in the context.
+    I provide the user's status regarding some prerequisites of the topic. If the user does not know some prerequisites, cover them before explaining the question to the user.
+    Answer in an academic tone.
+    User query:
+    \{query\}
+    Your response should mixed of this content:
+    \{docs\_content\}
+\end{quote}
