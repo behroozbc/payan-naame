@@ -1,4 +1,4 @@
-\section{RAG Pipeline}
+\section{RAFT Pipeline}
 
 The RAG pipeline is built from several components, such as search, prompt builder, and others.
 In this section, we examine each design choice and explain the rationale behind it.
@@ -30,7 +30,37 @@ on the extracted keywords.
 
 \subsection{Gather Prerequisites}
 
-Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. We fetch the
-prerequisites and their content for inclusion in the prompt.
+The prerequisites are a very critical point which explained in detail in introduction. So Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. We fetch the
+prerequisites and their content for inclusion in the prompt. The reason for it is we want to answer include prerequisites and LLM explain it before explaining user question(RQ1).
 
+Also, we fetch the learner model's dimensions of understanding for every prerequisite. This is very important thing because we want to find an answer to RQ1.
+In for the next steps, we call it `prerequisites\_level\_documents`.
 \subsection{Gather Symbols}
+Each item retrieved from the search has some Symbols on it.
+We fetch the learner model's dimensions of understanding for every Symbol.
+It is a vital point because we want to model response change the response based on user understanding of topic.
+In prompt, we call it `symbol\_level'.
+\subsection{Building the Prompt}
+
+Constructing the prompt is a critical step, as it must present the data in a structured manner that enables the model to comprehend the relationships between the various components. The prompt structure is as follows:
+\begin{quote}
+    You are a question-answering model for students. Please provide answers that are easy for students to understand.
+    Use all material provided in the context.
+    I provide the user's status regarding some prerequisites of the topic.
+    If the user does not know some prerequisites, cover them before explaining the question to the user.
+    Answer in an academic tone.
+    User query: \{user query\}\\
+    Your response should include the following content:
+    \{ retrieved documents\}\\
+    The symbols have understanding levels; if the user does not know them, please explain them, otherwise skip them:
+    \{symbol\_level\}\\
+    This is the prerequisites' status and content; if the user does not know them, please add the content, otherwise skip them:
+    \{prerequisites\_level\_documents\}
+\end{quote}
+
+\section{Fine-tuning}
+
+The RAG pipeline described above is essential because the data varies significantly across courses, making it impractical to fine-tune a model for each individual course.
+Nevertheless, fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
+In this thesis, we employ the QLoRA method for fine-tuning.
+A dataset comprising questions and corresponding answers was prepared for this purpose, with the questions sourced from the dataset.
