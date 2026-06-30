@@ -1,21 +1,21 @@
 \section{RAFT Pipeline}
 
 The RAG pipeline is built from several components, such as search, prompt builder, and others.
-In this section, we examine each design choice and explain the rationale behind it.
+In this section, each design choice is examined and the rationale behind it is explained.
 
 \subsection{Search}
 Text search plays a critical role in the RAG pipeline because retrieving relevant content and providing it to the LLM improves result consistency and reduces hallucinations.
-In this thesis, we employ two types of search to achieve better results: vector search and lexical search.
+In this thesis, two types of search are employed to achieve better results: vector search and lexical search.
 Combining these two methods yields a hybrid approach that leverages the strengths of both.
 
-The results of two search methods are FTML content which has a lot of unuseful HTML tags which cause LLMs context become full, so we remove many of them to make the html more rubust and fits context size of small models.
+The results of two search methods are FTML content which has a lot of unuseful HTML tags which cause LLMs context become full, so many of them are removed to make the HTML more robust and fit the context size of small models.
 \subsubsection{Vector Search}
-After constructing the dataset, we need to retrieve relevant information for our RAG pipeline.
+After constructing the dataset, relevant information needs to be retrieved for the RAG pipeline.
 By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
 Therefore, vector search functionality was necessary to enable semantic search over the content of MathHub.
-We retrieved content from the URLs of MathHub and built a vector database for querying this content.
+Content was retrieved from the URLs of MathHub and a vector database was built for querying this content.
 
-In this approach, we experimented with various embedding models to observe their impact on query results.
+In this approach, various embedding models were experimented with to observe their impact on query results.
 The results indicated that increasing the embedding dimensions beyond 1,000 can be counterproductive, yielding poor results.
 
 \subsubsection{Lexical Search}
@@ -31,16 +31,16 @@ on the extracted keywords.
 
 \subsection{Gather Prerequisites}
 
-The prerequisites are a very critical point which explained in detail in introduction. So Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. We fetch the
-prerequisites and their content for inclusion in the prompt. The reason for it is we want to answer include prerequisites and LLM explain it before explaining user question(RQ1).
+The prerequisites are a very critical point which is explained in detail in the introduction. Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. The
+prerequisites and their content are fetched for inclusion in the prompt. The reason for this is to include prerequisites so that the LLM can explain them before addressing the user's question (RQ1).
 
-Also, we fetch the learner model's dimensions of understanding for every prerequisite. This is very important thing because we want to find an answer to RQ1.
-In for the next steps, we call it `prerequisites\_level\_documents`.
+Also, the learner model's dimensions of understanding are fetched for every prerequisite. This is very important because it helps address RQ1.
+In the following steps, this is referred to as `prerequisites\_level\_documents`.
 \subsection{Gather Symbols}
 Each item retrieved from the search has some Symbols on it.
-We fetch the learner model's dimensions of understanding for every Symbol.
-It is a vital point because we want to model response change the response based on user understanding of topic.
-In prompt, we call it `symbol\_level'.
+The learner model's dimensions of understanding are fetched for every Symbol.
+This is a vital point because the model response should change based on the user's understanding of the topic.
+In the prompt, this is referred to as `symbol\_level'.
 \subsection{Building the Prompt}
 
 Constructing the prompt is a critical step, as it must present the data in a structured manner that enables the model to comprehend the relationships between the various components. The prompt structure is as follows:
@@ -63,5 +63,5 @@ Constructing the prompt is a critical step, as it must present the data in a str
 
 The RAG pipeline described above is essential because the data varies significantly across courses, making it impractical to fine-tune a model for each individual course.
 Nevertheless, fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
-In this thesis, we employ the QLoRA method for fine-tuning.
+In this thesis, the QLoRA method is employed for fine-tuning.
 A dataset comprising questions and corresponding answers was prepared for this purpose, with the questions sourced from the dataset.
