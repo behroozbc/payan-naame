@@ -1,0 +1,137 @@
+\begin{quote}
+        \label{appendix:zero_shot_without_context_answer}
+    % Since you did not specify your current level of knowledge regarding artificial intelligence, I will first cover the necessary prerequisites before providing a detailed academic explanation of what an AI Agent is.
+
+    % \textbf{Prerequisites}
+
+    % To understand an AI Agent, it is helpful to first understand two basic concepts:
+
+    % \begin{enumerate}
+    %     \item \textbf{Artificial Intelligence (AI):} This is a broad field of computer science focused on creating systems capable of performing tasks that typically require human intelligence, such as recognizing patterns or solving problems.
+    %     \item \textbf{Large Language Models (LLMs):} These are a specific type of AI (like GPT-4) trained on massive amounts of text. While an LLM can ``chat'' and provide information, it is primarily a prediction engine---it predicts the next word in a sequence based on its training.
+    % \end{enumerate}
+
+    % \textbf{The Key Difference:} A standard AI (like a basic chatbot) is \textbf{passive}; it waits for a prompt and provides a response. An AI Agent is \textbf{active}; it uses the AI as a ``brain'' to achieve a specific goal independently.
+
+    % \medskip
+    % \hrulefill
+    % \medskip
+
+    % \textbf{What is an AI Agent?}
+
+    % An \textbf{AI Agent} is an autonomous system that perceives its environment, reasons about how to achieve a specific goal, and takes actions to accomplish that goal without requiring constant human intervention.
+
+    % While a traditional AI program follows a strict set of ``if-then'' rules, an AI Agent uses an LLM as its core reasoning engine to decide \textit{which} rules to apply and \textit{when} to apply them.
+
+    % \textbf{The Core Architecture of an AI Agent}
+
+    % To function, an AI Agent generally relies on four primary components:
+
+    % \begin{enumerate}
+    %     \item \textbf{Perception (Input):} The agent receives information from its environment. This could be a user's request, a data feed from the internet, or sensory input from a camera.
+    %     \item \textbf{Brain (Reasoning \& Planning):} This is where the LLM resides. The agent breaks down a complex goal (e.g., ``Research this company and write a summary report'') into smaller, manageable steps. It plans the sequence of actions needed to reach the objective.
+    %     \item \textbf{Action (Tools):} This is what separates an agent from a chatbot. Agents have access to \textbf{tools} (also called ``plugins'' or ``functions''). Examples include:
+    %           \begin{itemize}
+    %               \item A web browser to search for current news.
+    %               \item A calculator for precise mathematics.
+    %               \item An API to send an email or update a calendar.
+    %               \item A code interpreter to run Python scripts.
+    %           \end{itemize}
+    %     \item \textbf{Memory:}
+    %           \begin{itemize}
+    %               \item \textbf{Short-term memory:} Keeping track of the current conversation and the steps already taken.
+    %               \item \textbf{Long-term memory:} Using databases (often called Vector Databases) to store and retrieve information over long periods.
+    %           \end{itemize}
+    % \end{enumerate}
+
+    % \textbf{Example Scenario: Chatbot vs. AI Agent}
+
+    % \textbf{Standard AI Chatbot:}
+    % \begin{itemize}
+    %     \item \textit{User:} ``Find the current stock price of Apple and tell me if it's a good time to buy.''
+    %     \item \textit{Chatbot:} ``I do not have real-time data, but generally, you should look at P/E ratios and market trends\ldots{}'' (The AI provides general knowledge but cannot act).
+    % \end{itemize}
+
+    % \textbf{AI Agent:}
+    % \begin{itemize}
+    %     \item \textit{User:} ``Find the current stock price of Apple and tell me if it's a good time to buy.''
+    %     \item \textit{Agent Process:}
+    %           \begin{enumerate}
+    %               \item \textbf{Plan:} I need to find the current price $\rightarrow$ Read recent financial news $\rightarrow$ Analyze trends $\rightarrow$ Formulate a conclusion.
+    %               \item \textbf{Action:} Uses a ``Web Search'' tool to find the current price.
+    %               \item \textbf{Action:} Uses a ``Finance API'' to pull the last 30 days of data.
+    %               \item \textbf{Reasoning:} Compares the data using its internal logic.
+    %               \item \textbf{Output:} ``The current price is $X$. Based on the current trend of $Y$, here is the analysis\ldots{}''
+    %           \end{enumerate}
+    % \end{itemize}
+
+    % \textbf{Summary}
+
+    % In academic terms, an AI Agent is a \textbf{goal-oriented autonomous entity}. It transforms AI from a tool that simply ``talks'' into a system that ``does,'' effectively closing the loop between digital reasoning and real-world action.
+To fully understand what an AI Agent is, it can be helpful to first review a couple of related concepts in computer science: \textbf{Artificial Intelligence (AI)} and \textbf{Agents}.
+
+\textbf{Prerequisites Review}
+
+\textbf{1. Artificial Intelligence (AI):}
+At its core, Artificial Intelligence refers to the simulation of human intelligence processes by machines, especially computer systems. These processes include learning (acquiring information and rules for using the information), reasoning (using rules to reach approximate or definite conclusions), and self-correction. In simpler terms, AI aims to make computers ``smart'' so they can perform tasks that usually require human intellect.
+
+\textbf{2. Agent:}
+In computing, an ``agent'' is generally defined as an entity that can perceive its environment and take actions to achieve specific goals. Think of a robot---it \textit{perceives} its environment (sees objects, feels temperature) and \textit{takes actions} (moves its arm, turns on a light).
+
+\textbf{What is an AI Agent?}
+
+An \textbf{AI Agent} is an entity that functions as an autonomous system. It is a computer program or a physical device that operates within an environment, perceives what is happening in that environment, and then decides on and executes actions to maximize the chance of achieving its predefined goals.
+
+Here is a breakdown of the key components of an AI Agent:
+
+\begin{itemize}
+    \item \textbf{Perception:} This is how the agent senses its environment. For a software agent, perception might be receiving data from a database or a user input; for a physical robot, it might be using cameras or sensors.
+    \item \textbf{Environment:} This is the world in which the agent operates. This could be a digital space (like a website or a virtual game) or the physical world (like a factory floor).
+    \item \textbf{Action:} These are the steps the agent can take to change the environment or move closer to its goal.
+    \item \textbf{Goal-Directed Behavior:} The most crucial aspect is that the agent is not just reacting randomly; it is driven by a specific objective (its goal). It uses its intelligence to figure out the best sequence of actions to reach that goal.
+\end{itemize}
+
+\textbf{In summary:} An AI Agent is an intelligent entity that uses perception to understand its surroundings and acts rationally to achieve what it has been programmed or designed to accomplish within that environment.
+\end{quote}
+
+\begin{quote}
+\label{appendix:context-augmented-baseline-answer}
+To define what an AI Agent is, it is helpful to first understand some related concepts from Artificial Intelligence (AI).
+
+\textbf{Prerequisites}
+
+\begin{itemize}
+    \item \textbf{Agent Function:} In AI, an agent is often initially described by its \textbf{agent function}, which is a mathematical relationship:
+    $$f: \mathcal{P}^* \rightarrow \mathcal{A}$$
+    Here, $\mathcal{P}^*$ represents the set of all possible sequences of \textbf{Percepts} (the input the agent receives from the environment), and $\mathcal{A}$ represents the set of possible \textbf{Actions} the agent can perform. The agent function maps the history of what the agent has observed to the action it should take.
+    \item \textbf{The Challenge:} While the agent function describes \textit{what} the agent should do, it does not provide a practical way to \textit{build} the agent. To actually create an agent, we need more than just the function.
+\end{itemize}
+
+\textbf{What is an AI Agent?}
+
+To build a functioning AI agent, we must fix an \textbf{agent architecture} and develop an \textbf{agent program} that runs on that architecture.
+
+An \textbf{AI Agent} can be understood as an entity that perceives its environment through \textbf{Sensors} and acts upon that environment using \textbf{Actuators}.
+
+The architectural components of an agent can be visualized using an \textbf{Agent Schema}. For instance, in an agent schema:
+\begin{itemize}
+    \item The \textbf{Environment} is the world the agent operates in.
+    \item The \textbf{Agent} is the entity itself.
+    \item \textbf{Sensors} allow the agent to receive \textbf{Percepts} (observations) from the environment.
+    \item \textbf{Actuators} allow the agent to perform \textbf{Actions} back into the environment.
+\end{itemize}
+
+\textbf{Agent Types and Architectures}
+
+Different types of agents correspond to different architectures, which represent increasing levels of complexity and intelligence:
+
+\begin{enumerate}
+    \item \textbf{Reflex Agents:} These are the most basic type. They react directly to the current percept, without considering the history of percepts.
+    \item \textbf{Model-Based Agents:} These agents maintain an internal state or ``model'' of the world to track things they cannot currently see.
+    \item \textbf{Goal-Based Agents:} These agents use their knowledge of the world and their goals to decide which actions will lead to a desired outcome.
+    \item \textbf{Utility-Based Agents:} These are the most advanced types. They not only consider goals but also a measure of ``utility'' (how ``good'' a state is) to choose the best possible action when multiple goal-achieving options exist.
+    \item \textbf{Learning Agents:} All the types mentioned above can be evolved into \textbf{learning agents}, meaning they can improve their performance over time by learning from their experiences.
+\end{enumerate}
+
+In summary, an AI Agent is a system that perceives its surroundings and takes actions based on its internal structure (its architecture and program) to achieve certain goals.
+\end{quote}
