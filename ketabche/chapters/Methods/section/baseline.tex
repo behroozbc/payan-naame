@@ -3,7 +3,7 @@
 To evaluate the effectiveness of the proposed approach, we establish two baseline methods. These baselines serve as reference points against which the performance of the full pipeline can be measured.
 
 \subsection{Zero-shot Baseline}
-
+\label{method:zero-shot-baseline}
 The first baseline method queries the large language model (LLM) directly without providing any external context. This approach assesses the model's intrinsic knowledge---i.e., how much it already knows about the topic by default, prior to receiving any supplementary information. The prompt used for this baseline is as follows:
 
 \begin{quote}
@@ -15,7 +15,7 @@ The first baseline method queries the large language model (LLM) directly withou
 \end{quote}
 
 \subsection{Context-augmented Baseline}
-
+\label{method:context-augmented-baseline}
 The second baseline method provides the LLM with context retrieved by the search pipeline described in the following section. This constitutes a simple retrieval-augmented generation (RAG) approach, wherein the model is supplied with relevant documents but no mechanism exists to tailor the response to the individual user's knowledge state.
 
 The purpose of this baseline is to isolate the effect of merely adding context to the LLM's input. While this method addresses \textbf{RQ2} (i.e., it incorporates relevant source material), it suffers from a significant limitation: the generated answer follows a ``one-size-fits-all'' approach, disregarding the user's prior knowledge and prerequisites. Consequently, it fails to address \textbf{RQ1}. The prompt used for this baseline is as follows:

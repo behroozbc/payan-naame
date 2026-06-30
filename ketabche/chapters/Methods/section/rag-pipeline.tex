@@ -8,6 +8,7 @@ Text search plays a critical role in the RAG pipeline because retrieving relevan
 In this thesis, we employ two types of search to achieve better results: vector search and lexical search.
 Combining these two methods yields a hybrid approach that leverages the strengths of both.
 
+The results of two search methods are FTML content which has a lot of unuseful HTML tags which cause LLMs context become full, so we remove many of them to make the html more rubust and fits context size of small models.
 \subsubsection{Vector Search}
 After constructing the dataset, we need to retrieve relevant information for our RAG pipeline.
 By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
