@@ -1,1 +1,7 @@
 \section{LLM as judge}
+LLM as judge is a useful tool for analyzing all answers and providing feedback on them.
+The judge LLM is a model with more parameters, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
+This method raises many questions because LLMs are not entirely trustworthy, as they do not explain how they reach their decisions.
+
+For the answer relevance metric, a LLM was used to compare the generated answer with the correct answer
+and the prerequisites of every question, so that the model can verify whether they were covered.

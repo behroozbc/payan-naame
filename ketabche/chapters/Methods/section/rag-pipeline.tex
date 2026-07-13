@@ -8,7 +8,7 @@ Text search plays a critical role in the RAG pipeline because retrieving relevan
 In this thesis, two types of search are employed to achieve better results: vector search and lexical search.
 Combining these two methods yields a hybrid approach that leverages the strengths of both.
 
-The results of two search methods are FTML content which has a lot of unuseful HTML tags which cause LLMs context become full, so many of them are removed to make the HTML more robust and fit the context size of small models.
+The results of the two search methods are FTML content, which contains many useless HTML tags that cause the LLM's context to become full. Therefore, many of these tags are removed to make the HTML more robust and fit the context size of small models.
 \subsubsection{Vector Search}
 After constructing the dataset, relevant information needs to be retrieved for the RAG pipeline.
 By default, MathHub offers a robust text-based search system; however, it does not support vector-based search.
@@ -26,16 +26,17 @@ Furthermore, users tend to ask questions that describe a concept rather than usi
 For example, if the user input is ``What does an NP-hard problem mean?'' the pure text search will retrieve
 unrelated content with low relevance scores because it requires the exact phrase ``NP-hard'' to appear in the results.
 
-This limitation motivated us to develop a keyword extraction mechanism from the user input and apply the text search
-on the extracted keywords.
+This limitation motivated the development of a keyword extraction mechanism from the user input, on which the text search
+is then applied.
 
 \subsection{Gather Prerequisites}
 
-The prerequisites are a very critical point which is explained in detail in the introduction. Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. The
-prerequisites and their content are fetched for inclusion in the prompt. The reason for this is to include prerequisites so that the LLM can explain them before addressing the user's question (RQ1).
+Prerequisites are a critical aspect, as explained in detail in the introduction. Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. The
+prerequisites and their content are fetched for inclusion in the prompt. The purpose is to include prerequisites so that the LLM can explain them before addressing the user's question (RQ1).
 
 Also, the learner model's dimensions of understanding are fetched for every prerequisite. This is very important because it helps address RQ1.
 In the following steps, this is referred to as `prerequisites\_level\_documents`.
+The prerequisites are categorized into three sections based on the average value of Bloom's metrics. For beginners, all content should be explained. For medium-level learners, the explanation should be limited to two sentences. For experts, the prerequisites are skipped.
 \subsection{Gather Symbols}
 Each item retrieved from the search has some Symbols on it.
 The learner model's dimensions of understanding are fetched for every Symbol.
@@ -64,4 +65,6 @@ Constructing the prompt is a critical step, as it must present the data in a str
 The RAG pipeline described above is essential because the data varies significantly across courses, making it impractical to fine-tune a model for each individual course.
 Nevertheless, fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
 In this thesis, the QLoRA method is employed for fine-tuning.
-A dataset comprising questions and corresponding answers was prepared for this purpose, with the questions sourced from the dataset.
+A dataset comprising questions, corresponding answers, and the learner model status was prepared for this purpose, with the questions sourced from the dataset.
+The model selected for fine-tuning is Google Gemma 4 E4B \cite{gemmateam2026gemma4technicalreport}.
+This is a small model with only 4 billion parameters.
