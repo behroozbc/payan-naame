@@ -1,6 +1,6 @@
 \section{RAFT: Adapting Language Model to Domain Specific RAG}
 
-Retrieval-Augmented Fine-Tuning (RAFT) is a training paradigm introduced by Zhang et al.\ \cite{zhang2024raft} that bridges the gap between generic RAG pipelines and domain-specific retrieval-augmented generation. While standard RAG systems combine a frozen retriever with a frozen language model at inference time, RAFT proposes fine-tuning the language model itself to better leverage retrieved documents in a specific domain. This approach is particularly relevant for educational settings, where course materials, notation conventions, and pedagogical priorities vary significantly across subjects and institutions.
+Retrieval-Augmented Fine-Tuning (RAFT) is a training paradigm introduced by Zhang et al.\ \cite{zhang2024raftadaptinglanguagemodel} that bridges the gap between generic RAG pipelines and domain-specific retrieval-augmented generation. While standard RAG systems combine a frozen retriever with a frozen language model at inference time, RAFT proposes fine-tuning the language model itself to better leverage retrieved documents in a specific domain. This approach is particularly relevant for educational settings, where course materials, notation conventions, and pedagogical priorities vary significantly across subjects and institutions.
 
 \subsection{Motivation and Problem Setting}
 
@@ -17,7 +17,7 @@ A critical design choice in RAFT is the inclusion of \emph{distractor documents}
 Formally, the training objective is to maximise the log-likelihood of the target answer given the query and the retrieved document set:
 
 \[
-\mathcal{L}_{\text{RAFT}} = -\sum_{i} \log P_{\theta}(a_i \mid q_i, \mathcal{D}_i),
+\mathcal{L}_{\mathrm{RAFT}} = -\sum_{i} \log P_{\theta}(a_i \mid q_i, \mathcal{D}_i),
 \]
 
 where \(\theta\) denotes the parameters of the language model. The model is trained using standard supervised fine-tuning, optionally augmented with parameter-efficient methods such as LoRA \cite{hu2022lora} or QLoRA \cite{dettmers2023qlora} to reduce computational overhead.
@@ -30,7 +30,7 @@ RAFT is naturally compatible with parameter-efficient fine-tuning (PEFT) techniq
 \mathbf{W}' = \mathbf{W} + \Delta \mathbf{W} = \mathbf{W} + \mathbf{B}\mathbf{A},
 \]
 
-where \(\mathbf{B} \in \mathbb{R}^{d \times r}\), \(\mathbf{A} \in \mathbb{R}^{r \times k}\), and the rank \(r \ll \min(d, k)\). This formulation enables domain adaptation with minimal memory footprint and without catastrophic forgetting of the model's pre-trained knowledge.
+where \(\mathbf{B} \in \mathbb{R}^{d \times r}\), \(\mathbf{A} \in \mathbb{R}^{r \times k}\), and the rank \(r \ll \min(d, k)\).\footnote{Here \(\min\) denotes the minimum function.} This formulation enables domain adaptation with minimal memory footprint and without catastrophic forgetting of the model's pre-trained knowledge.
 
 \emph{Quantized LoRA} (QLoRA) \cite{dettmers2023qlora} extends this approach by first quantising the pre-trained model to 4-bit precision and then applying LoRA adaptors. This reduces the memory requirements sufficiently to fine-tune models with billions of parameters on a single consumer-grade GPU, making domain-specific fine-tuning accessible to a wider range of practitioners.
 
