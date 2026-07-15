@@ -1,0 +1,51 @@
+\section{Retrieval-Augmented Generation}
+
+Retrieval-Augmented Generation (RAG) is a paradigm that combines parametric knowledge stored in large language models with non-parametric knowledge retrieved from external corpora at inference time \cite{lewis2020retrieval}. By grounding the generation process in retrieved evidence, RAG mitigates two fundamental shortcomings of standalone LLMs: the tendency to hallucinate factually incorrect content and the inability to incorporate up-to-date or domain-specific information that lies beyond the model's training data \cite{gao2023retrieval, fan2024retrieval}.
+
+\subsection{Architectural Overview}
+
+The canonical RAG architecture comprises three principal components: a retrieval module, a fusion module, and a generation module. Given a user query \(q\), the retrieval module first identifies a set of relevant documents \(\mathcal{D} = \{d_1, d_2, \dots, d_k\}\) from a knowledge base. The fusion module then integrates these documents with the original query to form an enriched context. Finally, the generation module produces an answer \(a\) conditioned on both \(q\) and \(\mathcal{D}\) \cite{lewis2020retrieval}.
+
+Formally, the process can be expressed as:
+
+\[
+a = \arg\max_{a'} P_{\theta}(a' \mid q, \mathcal{D}),
+\]
+
+where \(\theta\) denotes the parameters of the language model. This formulation ensures that the generated output is anchored to verifiable external sources, thereby reducing the risk of hallucination \cite{guu2020realm}.
+
+\subsection{Retrieval Strategies}
+
+The effectiveness of a RAG system is heavily dependent on the quality of its retrieval mechanism. Two principal retrieval paradigms have emerged in the literature.
+
+\subsubsection{Sparse Retrieval}
+
+Sparse retrieval methods, most notably BM25 \cite{robertson2009probabilistic}, operate on exact term matching between the query and documents. These approaches are computationally efficient and well-suited for keyword-oriented queries. However, they suffer from the vocabulary mismatch problem: a query that uses synonyms or paraphrases of the target terms may fail to retrieve relevant documents \cite{chen2017reading}.
+
+\subsubsection{Dense Retrieval}
+
+Dense retrieval methods address the vocabulary mismatch problem by encoding both queries and documents into continuous vector spaces using neural encoders \cite{karpukhin2020dense}. The relevance between a query \(q\) and a document \(d\) is computed as the cosine similarity between their respective embeddings:
+
+% \[
+% \text{sim}(q, d) = \frac{\mathbf{e}_q \cdot \mathbf{e}_d}{\|\mathbf{e}_q\| \|\mathbf{e}_d\|},
+% \]
+
+where \(\mathbf{e}_q\) and \(\mathbf{e}_d\) are dense vector representations produced by models such as Sentence-BERT \cite{reimers2019sentence}. Dense retrieval captures semantic similarity beyond surface-level lexical overlap, making it particularly effective for open-domain question answering \cite{karpukhin2020dense}.
+
+\subsubsection{Hybrid Retrieval}
+
+Recent work has demonstrated that combining sparse and dense retrieval methods yields superior performance across diverse domains \cite{gao2023retrieval}. Hybrid approaches leverage the precision of exact term matching alongside the semantic flexibility of dense embeddings, thereby providing a more robust retrieval foundation for downstream generation.
+
+\subsection{Integration with Language Models}
+
+RAG systems can be categorised by how the retrieval and generation components interact. In the \emph{retrieve-then-read} paradigm, retrieval is performed once before generation, and the retrieved documents are concatenated with the query to form the model input \cite{chen2017reading, lewis2020retrieval}. This approach is simple and effective for many knowledge-intensive tasks.
+
+More advanced paradigms incorporate iterative or interleaved retrieval during the generation process. For instance, REALM \cite{guu2020realm} jointly pre-trains the retriever and the language model, while RETRO \cite{borgeaud2022improving} augments an autoregressive language model with a chunked cross-attention mechanism over a large retrieval corpus. These methods enable the model to access external knowledge at multiple points during generation, further improving factual accuracy.
+
+\subsection{Applications in Education}
+
+The application of RAG to educational contexts is a growing area of research. By grounding responses in course-specific materials, RAG-based tutoring systems can deliver answers that are both factually reliable and aligned with the curriculum \cite{gao2023retrieval}. Furthermore, the retrieved context can be augmented with metadata---such as prerequisite relationships and learner proficiency estimates---to tailor explanations to the individual student's knowledge state. This capability directly addresses the personalisation challenges outlined in the introduction of this thesis.
+
+\subsection{Limitations and Challenges}
+
+Despite its advantages, RAG introduces several challenges. The retrieval module may return irrelevant or noisy documents, which can mislead the generator \cite{fan2024retrieval}. Additionally, the latency introduced by the retrieval step can be prohibitive for real-time applications. Recent research has focused on improving retrieval precision through query rewriting, document re-ranking, and adaptive retrieval thresholds \cite{ram2023retrieval, shao2023retrieval}.

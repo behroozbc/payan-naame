@@ -3,92 +3,9 @@
 This chapter provides a comprehensive review of foundational technologies
 that underpin this thesis.
 
-\section{Large Language Models}
-
-Large Language Models (LLMs) represent a paradigm shift in natural language processing, characterised by their ability to model, generate, and manipulate human language with remarkable fluency. At their core, LLMs are neural sequence models trained on vast corpora of textual data, typically employing the Transformer architecture introduced by Vaswani et al.\ \cite{VasShaPar:aiayn17}. The defining feature of this architecture is the self-attention mechanism, which enables the model to weigh the relevance of every token in the input sequence when computing a representation for any given position. Formally, for a sequence of input vectors \(\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n]\), the scaled dot-product attention is computed as:
-
-\[
-\mathrm{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \mathrm{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^{\mathsf{T}}}{\sqrt{d_k}}\right)\mathbf{V},
-\]
-
-where \(\mathbf{Q}\), \(\mathbf{K}\), and \(\mathbf{V}\) are query, key, and value matrices derived from \(\mathbf{X}\), and \(d_k\) is the dimensionality of the key vectors. This mechanism allows each token to attend to all other tokens in the sequence, thereby capturing long-range dependencies that recurrent architectures struggle to model effectively.
-
-\subsection{Architectural Evolution}
-
-The original Transformer was proposed in an encoder--decoder configuration for machine translation. Subsequent work demonstrated that scaling the decoder-only variant---a causal language model that predicts the next token given all preceding tokens---yields emergent capabilities not explicitly programmed during training \cite{brown2020languagemodelsfewshotlearners}. The autoregressive objective can be expressed as:
-
-\[
-P(\mathbf{x}) = \prod_{t=1}^{T} P(x_t \mid x_{<t}; \theta),
-\]
-
-where \(\theta\) denotes the model parameters and \(x_{<t}\) represents the prefix of tokens preceding position \(t\). Models such as the Generative Pre-trained Transformer (GPT) family \cite{radford2018improving, brown2020languagemodelsfewshotlearners} and LLaMA \cite{touvron2023llama} adopt this formulation, scaling to hundreds of billions of parameters and training on trillions of tokens \cite{hoffmann2022training}.
-
-\subsection{Pre-training and Scaling Laws}
-
-LLMs are pre-trained in a self-supervised manner on large, diverse corpora drawn from the Web, books, and scientific articles. During pre-training, the model learns a rich distributional representation of language, capturing syntactic, semantic, and factual knowledge implicitly from the training data. Kaplan et al.\ \cite{kaplan2020scaling} and Hoffmann et al.\ \cite{hoffmann2022training} established that the performance of these models follows a power-law relationship with three factors: the number of model parameters, the size of the training dataset, and the amount of compute used for training. This finding, known as the \emph{scaling law}, has driven the trend toward increasingly large models and datasets.
-
-\subsection{Instruction Tuning and Alignment}
-
-While pre-trained LLMs exhibit strong language understanding, their outputs are not naturally aligned with user intent. To bridge this gap, \emph{instruction tuning} is employed: the model is fine-tuned on a dataset of (instruction, response) pairs, teaching it to follow diverse prompts \cite{ouyang2022training}. This process is often followed by Reinforcement Learning from Human Feedback (RLHF) \cite{ziegler2019fine, lambert2024illustrating}, wherein a reward model trained on human preferences is used to steer the policy toward outputs that are helpful, honest, and harmless. The combined effect of instruction tuning and RLHF is what makes models such as GPT-4 and Claude behave as conversational assistants rather than raw next-token predictors.
-
-\subsection{Limitations}
-
-Despite their capabilities, LLMs suffer from several well-documented limitations. First, they exhibit a tendency to \emph{hallucinate}---generating content that is fluent and superficially plausible but factually incorrect \cite{ji2023survey, huang2023survey}. Second, their knowledge is frozen at the time of pre-training, rendering them unable to incorporate new or domain-specific information without costly re-training or fine-tuning. Third, the parametric nature of their knowledge makes it difficult to verify the provenance of generated claims, as the model does not cite external sources by default. These limitations motivate the integration of LLMs with external retrieval mechanisms, a topic explored in the Retrieval-Augmented Generation section of this chapter.
-
-\section{Fine-tuning}
-\section{RAFT}
-\section{FTML}
-\section{Retrieval-Augmented Generation}
-
-Retrieval-Augmented Generation (RAG) is a paradigm that combines parametric knowledge stored in large language models with non-parametric knowledge retrieved from external corpora at inference time \cite{lewis2020retrieval}. By grounding the generation process in retrieved evidence, RAG mitigates two fundamental shortcomings of standalone LLMs: the tendency to hallucinate factually incorrect content and the inability to incorporate up-to-date or domain-specific information that lies beyond the model's training data \cite{gao2023retrieval, fan2024retrieval}.
-
-\subsection{Architectural Overview}
-
-The canonical RAG architecture comprises three principal components: a retrieval module, a fusion module, and a generation module. Given a user query \(q\), the retrieval module first identifies a set of relevant documents \(\mathcal{D} = \{d_1, d_2, \dots, d_k\}\) from a knowledge base. The fusion module then integrates these documents with the original query to form an enriched context. Finally, the generation module produces an answer \(a\) conditioned on both \(q\) and \(\mathcal{D}\) \cite{lewis2020retrieval}.
-
-Formally, the process can be expressed as:
-
-\[
-a = \arg\max_{a'} P_{\theta}(a' \mid q, \mathcal{D}),
-\]
-
-where \(\theta\) denotes the parameters of the language model. This formulation ensures that the generated output is anchored to verifiable external sources, thereby reducing the risk of hallucination \cite{guu2020realm}.
-
-\subsection{Retrieval Strategies}
-
-The effectiveness of a RAG system is heavily dependent on the quality of its retrieval mechanism. Two principal retrieval paradigms have emerged in the literature.
-
-\subsubsection{Sparse Retrieval}
-
-Sparse retrieval methods, most notably BM25 \cite{robertson2009probabilistic}, operate on exact term matching between the query and documents. These approaches are computationally efficient and well-suited for keyword-oriented queries. However, they suffer from the vocabulary mismatch problem: a query that uses synonyms or paraphrases of the target terms may fail to retrieve relevant documents \cite{chen2017reading}.
-
-\subsubsection{Dense Retrieval}
-
-Dense retrieval methods address the vocabulary mismatch problem by encoding both queries and documents into continuous vector spaces using neural encoders \cite{karpukhin2020dense}. The relevance between a query \(q\) and a document \(d\) is computed as the cosine similarity between their respective embeddings:
-
-% \[
-% \text{sim}(q, d) = \frac{\mathbf{e}_q \cdot \mathbf{e}_d}{\|\mathbf{e}_q\| \|\mathbf{e}_d\|},
-% \]
-
-where \(\mathbf{e}_q\) and \(\mathbf{e}_d\) are dense vector representations produced by models such as Sentence-BERT \cite{reimers2019sentence}. Dense retrieval captures semantic similarity beyond surface-level lexical overlap, making it particularly effective for open-domain question answering \cite{karpukhin2020dense}.
-
-\subsubsection{Hybrid Retrieval}
-
-Recent work has demonstrated that combining sparse and dense retrieval methods yields superior performance across diverse domains \cite{gao2023retrieval}. Hybrid approaches leverage the precision of exact term matching alongside the semantic flexibility of dense embeddings, thereby providing a more robust retrieval foundation for downstream generation.
-
-\subsection{Integration with Language Models}
-
-RAG systems can be categorised by how the retrieval and generation components interact. In the \emph{retrieve-then-read} paradigm, retrieval is performed once before generation, and the retrieved documents are concatenated with the query to form the model input \cite{chen2017reading, lewis2020retrieval}. This approach is simple and effective for many knowledge-intensive tasks.
-
-More advanced paradigms incorporate iterative or interleaved retrieval during the generation process. For instance, REALM \cite{guu2020realm} jointly pre-trains the retriever and the language model, while RETRO \cite{borgeaud2022improving} augments an autoregressive language model with a chunked cross-attention mechanism over a large retrieval corpus. These methods enable the model to access external knowledge at multiple points during generation, further improving factual accuracy.
-
-\subsection{Applications in Education}
-
-The application of RAG to educational contexts is a growing area of research. By grounding responses in course-specific materials, RAG-based tutoring systems can deliver answers that are both factually reliable and aligned with the curriculum \cite{gao2023retrieval}. Furthermore, the retrieved context can be augmented with metadata---such as prerequisite relationships and learner proficiency estimates---to tailor explanations to the individual student's knowledge state. This capability directly addresses the personalisation challenges outlined in the introduction of this thesis.
-
-\subsection{Limitations and Challenges}
-
-Despite its advantages, RAG introduces several challenges. The retrieval module may return irrelevant or noisy documents, which can mislead the generator \cite{fan2024retrieval}. Additionally, the latency introduced by the retrieval step can be prohibitive for real-time applications. Recent research has focused on improving retrieval precision through query rewriting, document re-ranking, and adaptive retrieval thresholds \cite{ram2023retrieval, shao2023retrieval}.
-
+\input{chapters/Fundamentals and Related Work/sections/llm.tex}
+\input{chapters/Fundamentals and Related Work/sections/rag.tex}
+\input{chapters/Fundamentals and Related Work/sections/raft.tex}
+\input{chapters/Fundamentals and Related Work/sections/ftml.tex}
 \input{chapters/Fundamentals and Related Work/sections/mathhub.tex}
 \input{chapters/Fundamentals and Related Work/sections/alea.tex}

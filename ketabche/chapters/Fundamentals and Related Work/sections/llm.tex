@@ -1,0 +1,31 @@
+\section{Large Language Models}
+
+Large Language Models (LLMs) represent a paradigm shift in natural language processing, characterised by their ability to model, generate, and manipulate human language with remarkable fluency. At their core, LLMs are neural sequence models trained on vast corpora of textual data, typically employing the Transformer architecture introduced by Vaswani et al.\ \cite{VasShaPar:aiayn17}. The defining feature of this architecture is the self-attention mechanism, which enables the model to weigh the relevance of every token in the input sequence when computing a representation for any given position. Formally, for a sequence of input vectors \(\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n]\), the scaled dot-product attention is computed as:
+
+\[
+\mathrm{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \mathrm{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^{\mathsf{T}}}{\sqrt{d_k}}\right)\mathbf{V},
+\]
+
+where \(\mathbf{Q}\), \(\mathbf{K}\), and \(\mathbf{V}\) are query, key, and value matrices derived from \(\mathbf{X}\), and \(d_k\) is the dimensionality of the key vectors. This mechanism allows each token to attend to all other tokens in the sequence, thereby capturing long-range dependencies that recurrent architectures struggle to model effectively.
+
+\subsection{Architectural Evolution}
+
+The original Transformer was proposed in an encoder--decoder configuration for machine translation. Subsequent work demonstrated that scaling the decoder-only variant---a causal language model that predicts the next token given all preceding tokens---yields emergent capabilities not explicitly programmed during training \cite{brown2020languagemodelsfewshotlearners}. The autoregressive objective can be expressed as:
+
+\[
+P(\mathbf{x}) = \prod_{t=1}^{T} P(x_t \mid x_{<t}; \theta),
+\]
+
+where \(\theta\) denotes the model parameters and \(x_{<t}\) represents the prefix of tokens preceding position \(t\). Models such as the Generative Pre-trained Transformer (GPT) family \cite{radford2018improving, brown2020languagemodelsfewshotlearners} and LLaMA \cite{touvron2023llama} adopt this formulation, scaling to hundreds of billions of parameters and training on trillions of tokens \cite{hoffmann2022training}.
+
+\subsection{Pre-training and Scaling Laws}
+
+LLMs are pre-trained in a self-supervised manner on large, diverse corpora drawn from the Web, books, and scientific articles. During pre-training, the model learns a rich distributional representation of language, capturing syntactic, semantic, and factual knowledge implicitly from the training data. Kaplan et al.\ \cite{kaplan2020scaling} and Hoffmann et al.\ \cite{hoffmann2022training} established that the performance of these models follows a power-law relationship with three factors: the number of model parameters, the size of the training dataset, and the amount of compute used for training. This finding, known as the \emph{scaling law}, has driven the trend toward increasingly large models and datasets.
+
+\subsection{Instruction Tuning and Alignment}
+
+While pre-trained LLMs exhibit strong language understanding, their outputs are not naturally aligned with user intent. To bridge this gap, \emph{instruction tuning} is employed: the model is fine-tuned on a dataset of (instruction, response) pairs, teaching it to follow diverse prompts \cite{ouyang2022training}. This process is often followed by Reinforcement Learning from Human Feedback (RLHF) \cite{ziegler2019fine, lambert2024illustrating}, wherein a reward model trained on human preferences is used to steer the policy toward outputs that are helpful, honest, and harmless. The combined effect of instruction tuning and RLHF is what makes models such as GPT-4 and Claude behave as conversational assistants rather than raw next-token predictors.
+
+\subsection{Limitations}
+
+Despite their capabilities, LLMs suffer from several well-documented limitations. First, they exhibit a tendency to \emph{hallucinate}---generating content that is fluent and superficially plausible but factually incorrect \cite{ji2023survey, huang2023survey}. Second, their knowledge is frozen at the time of pre-training, rendering them unable to incorporate new or domain-specific information without costly re-training or fine-tuning. Third, the parametric nature of their knowledge makes it difficult to verify the provenance of generated claims, as the model does not cite external sources by default. These limitations motivate the integration of LLMs with external retrieval mechanisms, a topic explored in the Retrieval-Augmented Generation section of this chapter.

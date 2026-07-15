@@ -1,0 +1,51 @@
+\section{RAFT: Adapting Language Model to Domain Specific RAG}
+
+Retrieval-Augmented Fine-Tuning (RAFT) is a training paradigm introduced by Zhang et al.\ \cite{zhang2024raft} that bridges the gap between generic RAG pipelines and domain-specific retrieval-augmented generation. While standard RAG systems combine a frozen retriever with a frozen language model at inference time, RAFT proposes fine-tuning the language model itself to better leverage retrieved documents in a specific domain. This approach is particularly relevant for educational settings, where course materials, notation conventions, and pedagogical priorities vary significantly across subjects and institutions.
+
+\subsection{Motivation and Problem Setting}
+
+Conventional RAG pipelines suffer from a fundamental limitation: the language model is not explicitly trained to utilise retrieved documents effectively. When multiple documents are retrieved for a given query, the model may ignore relevant content, over-rely on noisy passages, or fail to distinguish between authoritative and peripheral sources \cite{gao2023retrieval}. This issue is exacerbated in domain-specific contexts, where the model's pre-training data may not adequately cover specialised terminology, notation, or conceptual frameworks.
+
+RAFT addresses this problem by introducing a fine-tuning stage in which the model learns, through supervised examples, to extract and synthesise information from a set of retrieved documents to answer a given query. The core insight is that the model should be trained to read and reason over the retrieved documents in a manner analogous to how a human expert consults reference materials before formulating an answer \cite{zhang2024raft}.
+
+\subsection{Training Methodology}
+
+The RAFT training procedure operates on a dataset of triples \(\mathcal{D} = \{(q_i, \mathcal{D}_i, a_i)\}\), where \(q_i\) is a query, \(\mathcal{D}_i = \{d_{i,1}, d_{i,2}, \dots, d_{i,k}\}\) is a set of retrieved documents (some relevant, some distracting), and \(a_i\) is the target answer. During training, the model is presented with the query and the document set, and is optimised to generate the correct answer \(a_i\).
+
+A critical design choice in RAFT is the inclusion of \emph{distractor documents}---retrieved passages that are topically related to the query but do not contain the information needed to answer it. By training on mixed-quality retrieval results, the model learns to ignore irrelevant content and focus on the documents that are truly informative. This simulates the realistic scenario where the retriever returns a noisy mixture of relevant and irrelevant passages, thereby making the fine-tuned model more robust at inference time \cite{zhang2024raft}.
+
+Formally, the training objective is to maximise the log-likelihood of the target answer given the query and the retrieved document set:
+
+\[
+\mathcal{L}_{\text{RAFT}} = -\sum_{i} \log P_{\theta}(a_i \mid q_i, \mathcal{D}_i),
+\]
+
+where \(\theta\) denotes the parameters of the language model. The model is trained using standard supervised fine-tuning, optionally augmented with parameter-efficient methods such as LoRA \cite{hu2022lora} or QLoRA \cite{dettmers2023qlora} to reduce computational overhead.
+
+\subsection{Relationship to Parameter-Efficient Fine-Tuning}
+
+RAFT is naturally compatible with parameter-efficient fine-tuning (PEFT) techniques, which are essential when adapting large language models to domain-specific tasks without incurring prohibitive computational costs. Among these, \emph{Low-Rank Adaptation} (LoRA) \cite{hu2022lora} is particularly widely adopted. LoRA freezes the pre-trained model weights and injects trainable low-rank decomposition matrices into the attention layers, thereby reducing the number of trainable parameters by several orders of magnitude. The update to a weight matrix \(\mathbf{W} \in \mathbb{R}^{d \times k}\) is represented as:
+
+\[
+\mathbf{W}' = \mathbf{W} + \Delta \mathbf{W} = \mathbf{W} + \mathbf{B}\mathbf{A},
+\]
+
+where \(\mathbf{B} \in \mathbb{R}^{d \times r}\), \(\mathbf{A} \in \mathbb{R}^{r \times k}\), and the rank \(r \ll \min(d, k)\). This formulation enables domain adaptation with minimal memory footprint and without catastrophic forgetting of the model's pre-trained knowledge.
+
+\emph{Quantized LoRA} (QLoRA) \cite{dettmers2023qlora} extends this approach by first quantising the pre-trained model to 4-bit precision and then applying LoRA adaptors. This reduces the memory requirements sufficiently to fine-tune models with billions of parameters on a single consumer-grade GPU, making domain-specific fine-tuning accessible to a wider range of practitioners.
+
+\subsection{Comparison with Alternative Adaptation Methods}
+
+RAFT occupies a distinct position in the landscape of domain adaptation techniques. On one end of the spectrum, \emph{prompt-based methods} such as AutoPrompt \cite{shin2020autoprompt} and prompt tuning \cite{lester2021power} modify only the input representation while keeping the model frozen. These approaches are lightweight but often fail to capture complex domain-specific patterns. On the other end, full fine-tuning updates all model parameters, yielding high task-specific performance at the cost of substantial computational resources and the risk of catastrophic forgetting.
+
+RAFT strikes a middle ground by fine-tuning the model specifically to reason over retrieved documents, thereby combining the contextual grounding of RAG with the task-specific optimisation of fine-tuning. This is conceptually related to \emph{chain-of-thought} prompting \cite{wei2022chain} and self-consistency methods \cite{wang2023selfconsistency}, which also aim to improve the model's reasoning process, but RAFT achieves this through supervised training on domain-specific retrieval-augmented examples rather than through prompting strategies alone.
+
+\subsection{Relevance to This Thesis}
+
+The RAFT paradigm is directly relevant to the objectives of this thesis for several reasons. First, the educational domain is characterised by highly specialised content---course materials, lecture notes, and mathematical notation---that general-purpose LLMs do not encounter during pre-training. Fine-tuning a model on domain-specific retrieval-augmented examples enables it to internalise the structure and conventions of the target corpus.
+
+Second, the inclusion of distractor documents during RAFT training mirrors the realistic behaviour of the retrieval pipeline developed in this thesis, where the hybrid search mechanism may return passages of varying relevance. By training the model to filter out noise and attend to informative content, RAFT improves the robustness of the overall system.
+
+Third, the parameter-efficient nature of RAFT when combined with QLoRA \cite{dettmers2023qlora} makes it feasible to fine-tune a model on the educational datasets constructed in this work without requiring extensive computational resources. This aligns with the practical constraints of deploying such a system in real-world academic settings.
+
+The Tripartite RAFT approach proposed in this thesis builds upon these foundations by extending RAFT with a learner-aware mechanism that integrates the student's knowledge state into the fine-tuning process. This extension addresses the personalisation requirements outlined in the research questions (\textbf{RQ1} and \textbf{RQ4}) while retaining the domain-adaptation benefits of the original RAFT framework.
