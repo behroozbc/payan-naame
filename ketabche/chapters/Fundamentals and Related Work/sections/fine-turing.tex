@@ -1,3 +1,29 @@
-\section{fine tuning}
+\section{Fine-Tuning}
+
+Fine-tuning is a transfer learning technique in which a pre-trained model is adapted to a downstream task by updating its parameters on a task-specific dataset. While pre-trained large language models (LLMs) acquire broad linguistic and factual knowledge during the pre-training phase, they often require additional adaptation to perform effectively in specialised domains or to follow specific instruction formats \cite{radford2018improving}. Fine-tuning allows the model to specialise without the computational expense of training from scratch.
+
+Full fine-tuning, wherein all parameters of the model are updated, remains the most direct approach. However, as model sizes have grown to hundreds of billions of parameters, full fine-tuning has become prohibitively expensive in terms of both memory and computation. For a model with \(P\) parameters, full fine-tuning requires storing and updating gradients for all \(P\) parameters, necessitating multiple GPUs even for modestly sized models. This scalability challenge has motivated the development of parameter-efficient fine-tuning (PEFT) methods, which update only a small subset of the model's parameters while keeping the majority frozen.
+
 \subsection{LoRA}
+
+Low-Rank Adaptation (LoRA) is a parameter-efficient fine-tuning method that addresses the computational limitations of full fine-tuning \cite{hu2022lora}. The key insight underlying LoRA is that the weight updates incurred during fine-tuning exhibit a low intrinsic rank; that is, the change \(\Delta \mathbf{W} \in \mathbb{R}^{d \times k}\) to a pre-trained weight matrix \(\mathbf{W}_0\) can be decomposed into a product of two low-rank matrices:
+
+\[
+    \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \mathbf{B}\mathbf{A},
+\]
+
+where \(\mathbf{B} \in \mathbb{R}^{d \times r}\), \(\mathbf{A} \in \mathbb{R}^{r \times k}\), and the rank \(r \ll \min(d, k)\). During fine-tuning, \(\mathbf{W}_0\) remains frozen, and only the matrices \(\mathbf{A}\) and \(\mathbf{B}\) are updated. This decomposition drastically reduces the number of trainable parameters. For example, with \(d = k = 4096\) and \(r = 8\), the number of trainable parameters is reduced from approximately \(16.8 \times 10^6\) to approximately \(65 \times 10^3\), representing a reduction of over two orders of magnitude.
+
+In practice, LoRA is applied to the attention projection matrices of the Transformer architecture---namely \(\mathbf{W}_q\), \(\mathbf{W}_k\), \(\mathbf{W}_v\), and \(\mathbf{W}_o\)---while the parameters of the feed-forward layers and the embedding matrices remain frozen. The scaling factor \(\alpha / r\) controls the magnitude of the adaptation, where \(\alpha\) is a hyperparameter typically set to the first value of \(r\) used during experimentation.
+
+Empirically, LoRA achieves performance comparable to full fine-tuning on a range of natural language processing benchmarks, including question answering and text classification, while reducing the memory footprint to a level that permits fine-tuning on a single consumer-grade GPU \cite{hu2022lora}. This efficiency has made LoRA the de facto standard for adapting LLMs to domain-specific tasks, including the educational retrieval and generation tasks explored in this thesis.
+
 \subsection{QLoRA}
+
+Quantized Low-Rank Adaptation (QLoRA) extends LoRA by combining low-rank adaptation with model quantisation, further reducing the memory requirements for fine-tuning large language models \cite{dettmers2023qlora}. The central innovation of QLoRA is the use of the \emph{normalFloat4} (NF4) data type, a information-theoretically optimal quantisation scheme for normally distributed weights. By quantising the frozen pre-trained weights \(\mathbf{W}_0\) to 4-bit precision, QLoRA reduces the memory required to store the base model by approximately a factor of four relative to the standard 16-bit half-precision representation.
+
+QLoRA employs a double quantisation strategy: the quantisation constants themselves are further quantised to 8-bit, yielding additional memory savings. During the forward and backward passes, the 4-bit weights are dequantised on the fly to the computation data type (typically bfloat16 or float16), and the LoRA adaptor matrices \(\mathbf{A}\) and \(\mathbf{B}\) are maintained in full precision. This design ensures that the computational graph remains differentiable while the memory footprint of the base model is minimised.
+
+Dettmers et al.\ \cite{dettmers2023qlora} demonstrated that QLoRA can fine-tune a 65-billion-parameter model on a single 48 GB GPU without any degradation in performance relative to a 16-bit full fine-tuning baseline. This result is significant because it democratises access to state-of-the-art LLMs, enabling researchers and practitioners with limited hardware resources to adapt large models to their specific use cases.
+
+The combination of LoRA and QLoRA has become particularly relevant in the context of retrieval-augmented generation systems. Domain-specific RAG pipelines often require the underlying language model to be fine-tuned on the target corpus to improve its ability to process and reason over the retrieved context. Parameter-efficient methods such as LoRA and QLoRA make this adaptation feasible without requiring the substantial computational infrastructure that full fine-tuning would demand.
