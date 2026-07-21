@@ -22,6 +22,16 @@ The Learner Model associates Bloom's Taxonomy levels with every symbol in MathHu
   \end{tikzpicture}
 \end{center}
 The Tripartite name originates from this part because three separate systems are combined to produce one dataset for the task.
-\subsection{Question database}
+\subsection{Question dataset}
 Another dataset created for this thesis is a list of questions from students in the courses "AI-1/2" and "SMAI".
-This dataset has over 70 questions about these courses. It was used to test the model and fine-tune it.
+This dataset has over 50 questions about these courses. It was used to test the model results.
+Some questions of students are very general for courses and other one does not cover on the course materials.
+\subsection{Fine-tuning dataset}
+\label{fine_tune_dataset}
+RAFT method needs to fine tune the model, so a dataset created which forced on the 
+research questions. This dataset has 150 prompt with hand made answers. \footnote{mention rq numbers}
+Every prompt is actual prompt which uses on the RAFT system, the answers forced on
+the prerequisites and to different level of it. 
+In this dataset, some questions cannot answer from prompt. The reason for that is
+seen the model after finetuning again return don't know answer for these questions.
+
