@@ -1,7 +1,45 @@
-\section{LLM as judge}
-LLM as judge is a useful tool for analyzing all answers and providing feedback on them.
-The judge LLM is a model with more parameters, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
-This method raises many questions because LLMs are not entirely trustworthy, as they do not explain how they reach their decisions.
+\section{LLM as Judge}
 
-For the answer relevance metric, a LLM was used to compare the generated answer with the correct answer
-and the prerequisites of every question, so that the model can verify whether they were covered.
+Using an LLM as a judge is an effective approach for evaluating generated answers and providing feedback on their quality.
+The judge LLM is a model with a larger number of parameters, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
+This method raises several concerns, as LLMs are not entirely trustworthy
+and do not provide explainable reasoning for their decisions.
+
+For the answer relevance metric, an LLM was employed to compare the generated answer against the correct answer
+and the prerequisites of each question, enabling the model to verify whether all required concepts were adequately covered.
+
+The evaluation framework employed in this study leverages LLM-as-a-judge to assess four key dimensions of the RAG pipeline's performance, each capturing a distinct aspect of retrieval and generation quality.
+
+\textbf{Contextual Relevancy} evaluates the quality of the retriever component by measuring the overall relevance of the information contained within the retrieved context with respect to a given input. This metric operates by employing the LLM judge to assess whether the retrieved passages contain information pertinent to the user's query. A higher contextual relevancy score indicates that the retriever is effectively selecting documents that are topically aligned with the input, thereby providing the generator with a solid informational foundation.
+
+\textbf{Contextual Precision} assesses the retriever's ability to rank relevant nodes higher than irrelevant ones within the retrieved context. Unlike contextual relevancy, which considers the presence of relevant information in aggregate, contextual precision focuses on the ordering of retrieved passages. A well-calibrated retriever should position the most informative documents at the top of the ranked list, as downstream generation quality is often sensitive to the order in which context is presented. This metric is particularly important in scenarios where the generator attends to the context sequentially or where truncation of the context window may occur.
+
+\textbf{Faithfulness} measures the quality of the generator by evaluating whether the generated output factually aligns with the contents of the retrieved context. This metric addresses a critical concern in RAG systems: the tendency of language models to hallucinate or introduce information not supported by the provided context. A high faithfulness score indicates that the generator adheres closely to the retrieved evidence, producing answers that are grounded in the source material rather than relying solely on parametric knowledge.
+
+\textbf{Answer Relevancy} evaluates the degree to which the generated answer directly addresses the user's question. This metric examines whether the output contains information that is responsive to the query, avoiding extraneous or off-topic content. A high answer relevancy score reflects the system's ability to produce concise and targeted responses that meet the informational needs of the user.
+
+All four metrics are implemented as self-explaining LLM-Evals, meaning that in addition to producing a numerical score, the LLM judge generates a natural language explanation justifying its assessment. This interpretability is valuable for diagnosing specific failure modes within the pipeline and for iteratively refining system components.
+
+Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM judge assessed the generated answers across four key metrics.
+
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{lcccccc}
+            \hline
+            \textbf{Condition}         & \textbf{Contextual Relevancy} & \textbf{Answer Relevancy} & \textbf{Faithfulness} & \textbf{Contextual Precision} & \\
+            \hline
+            Zero-shot Baseline         & 7\%                           & 38\%                      & 29\%                  & 42\%                            \\
+            Context-augmented Baseline & 15\%                          & 55\%                      & 62\%                  & 40\%                            \\
+            RAG                        &                               &                           &                       &                                 \\
+            RAFT                       &                               &                           &                       &                                 \\
+            \hline
+        \end{tabular}%
+    }
+    \caption{LLM-as-judge scores. Higher
+        scores are better;}
+    \label{tab:llm_judge_metrics}
+\end{table}
+
+As illustrated in the table, the zero-shot baseline and the context-augmented baseline exhibit substantial differences across all metrics, yet they also share certain similarities. Notably, answer relevancy shows a marked improvement in the context-augmented baseline, likely because the generated answers incorporate content from the course materials.
+
