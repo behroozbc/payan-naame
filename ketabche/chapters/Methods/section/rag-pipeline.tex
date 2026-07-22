@@ -113,11 +113,11 @@ Constructing the prompt is a critical step, as it must present the data in a str
 
 \section{Fine-tuning}
 
-The RAG pipeline described above is essential because the data varies significantly across courses, making it impractical to fine-tune a model for each individual course.
+The RAG pipeline described above is essential because the data varies significantly across courses. Fine tuning is a big part of RAF pipelines. \footnote{khodaia sar darad daram}
 Nevertheless, fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
 In this thesis, the QLoRA method is employed for fine-tuning.
 A dataset comprising questions, corresponding answers, and the learner model status was prepared for this purpose, with the questions sourced from the dataset.
 The model selected for fine-tuning is Google Gemma 4 E4B \cite{gemmateam2026gemma4technicalreport}.
 This is a small model with only 4 billion parameters.
-The model fine-tuned for one epoch on Fine-tuning dataset \ref{fine_tune_dataset}.
+The model fine-tuned for one epoch and 20 steps on Fine-tuning dataset \ref{fine_tune_dataset}.
 
