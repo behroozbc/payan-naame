@@ -1,9 +1,12 @@
 \section{LLM as Judge}
 
+
 Using an LLM as a judge is an effective approach for evaluating generated answers and providing feedback on their quality.
 The judge LLM is a model with a larger number of parameters, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
 This method raises several concerns, as LLMs are not entirely trustworthy
 and do not provide explainable reasoning for their decisions.
+
+To compare the RAFT pipeline against baselines, we also introduce a RAG pipeline to evaluate the extent to which the fine-tuning phase of the RAFT pipeline influences the model and improves its results relative to the standard RAG pipeline.
 
 For the answer relevance metric, an LLM was employed to compare the generated answer against the correct answer
 and the prerequisites of each question, enabling the model to verify whether all required concepts were adequately covered.
@@ -47,3 +50,4 @@ To further investigate this issue, an additional experiment was conducted in whi
 
 However, relying solely on a fine-tuned model is not a sufficient solution for this approach, as the degree of customization required as mentioned on research questions at the beginning. Therefore, a mechanism that can be adapted at runtime is necessary, rather than relying on a fixed model from the outset.
 
+Another factor contributing to this issue is that the model is relatively small and has a very limited context window. As observed, when only context-augmented input is provided for the baseline, the model's answers become well-structured and coherent. However, when additional content is supplied, the increased volume of information causes the model to become confused, leading it to default to summarizing the text rather than generating a direct response.
