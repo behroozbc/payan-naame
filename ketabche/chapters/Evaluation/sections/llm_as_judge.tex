@@ -31,8 +31,8 @@ Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM
             \hline
             Zero-shot Baseline         & 7\%                           & 38\%                      & 29\%                  & 42\%                            \\
             Context-augmented Baseline & 15\%                          & 55\%                      & 62\%                  & 40\%                            \\
-            RAG                        &                               &                           &                       &                                 \\
-            RAFT                       &                               &                           &                       &                                 \\
+            RAG                        & 16\%                          & 44\%                      & 52\%                  & 18\%                            \\
+            RAFT                       & 10\%                          & 45\%                      & 52\%                  & 15\%                            \\
             \hline
         \end{tabular}%
     }
@@ -42,4 +42,10 @@ Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM
 \end{table}
 
 As illustrated in the table, the zero-shot baseline and the context-augmented baseline exhibit substantial differences across all metrics, yet they also share certain similarities. Notably, answer relevancy shows a marked improvement in the context-augmented baseline, likely because the generated answers incorporate content from the course materials.
+
+A notable observation is that the generated answers often fail to pass the answer relevancy evaluation because the model tends to default to summarizing the input rather than directly addressing the question. Upon reviewing the model's chain-of-thought reasoning for each answer, a recurring pattern emerges: initially, the model correctly identifies the need to answer the user's question directly. However, as the chain-of-thought progresses deeper into the reasoning process---particularly when listing prerequisites---the model loses sight of the original question. For instance, when asked "What is an AI agent?", the model shifts its focus to producing a comprehensive summary of the prerequisites rather than providing a direct and concise answer to the question posed.
+
+To further investigate this issue, an additional experiment was conducted in which the same question was posed to the fine-tuned model without providing any prior context or instructions regarding academic tone. The objective was to assess the model's ability to answer the question independently, without any guidance or preferences. Interestingly, the resulting answers exhibited a markedly improved academic tone and overall quality compared to those generated with context and prerequisite information. This suggests that, in certain cases, providing additional context may inadvertently lead the model away from producing a direct and well-formulated response, and that a standalone question without supplementary instructions can yield superior results.
+
+However, relying solely on a fine-tuned model is not a sufficient solution for this approach, as the degree of customization required as mentioned on research questions at the beginning. Therefore, a mechanism that can be adapted at runtime is necessary, rather than relying on a fixed model from the outset.
 
