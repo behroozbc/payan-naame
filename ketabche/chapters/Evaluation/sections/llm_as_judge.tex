@@ -8,31 +8,29 @@ and do not provide explainable reasoning for their decisions.
 For the answer relevance metric, an LLM was employed to compare the generated answer against the correct answer
 and the prerequisites of each question, enabling the model to verify whether all required concepts were adequately covered.
 
-The evaluation framework employed in this study leverages LLM-as-a-judge to assess four key dimensions of the RAG pipeline's performance, each capturing a distinct aspect of retrieval and generation quality.
+The evaluation framework employed in this study leverages LLM-as-a-judge to assess three key dimensions of the RAG pipeline's performance, each capturing a distinct aspect of retrieval and generation quality.
 
 \textbf{Contextual Relevancy} evaluates the quality of the retriever component by measuring the overall relevance of the information contained within the retrieved context with respect to a given input. This metric operates by employing the LLM judge to assess whether the retrieved passages contain information pertinent to the user's query. A higher contextual relevancy score indicates that the retriever is effectively selecting documents that are topically aligned with the input, thereby providing the generator with a solid informational foundation.
-
-\textbf{Contextual Precision} assesses the retriever's ability to rank relevant nodes higher than irrelevant ones within the retrieved context. Unlike contextual relevancy, which considers the presence of relevant information in aggregate, contextual precision focuses on the ordering of retrieved passages. A well-calibrated retriever should position the most informative documents at the top of the ranked list, as downstream generation quality is often sensitive to the order in which context is presented. This metric is particularly important in scenarios where the generator attends to the context sequentially or where truncation of the context window may occur.
 
 \textbf{Faithfulness} measures the quality of the generator by evaluating whether the generated output factually aligns with the contents of the retrieved context. This metric addresses a critical concern in RAG systems: the tendency of language models to hallucinate or introduce information not supported by the provided context. A high faithfulness score indicates that the generator adheres closely to the retrieved evidence, producing answers that are grounded in the source material rather than relying solely on parametric knowledge.
 
 \textbf{Answer Relevancy} evaluates the degree to which the generated answer directly addresses the user's question. This metric examines whether the output contains information that is responsive to the query, avoiding extraneous or off-topic content. A high answer relevancy score reflects the system's ability to produce concise and targeted responses that meet the informational needs of the user.
 
-All four metrics are implemented as self-explaining LLM-Evals, meaning that in addition to producing a numerical score, the LLM judge generates a natural language explanation justifying its assessment. This interpretability is valuable for diagnosing specific failure modes within the pipeline and for iteratively refining system components.
+All three metrics are implemented as self-explaining LLM-Evals, meaning that in addition to producing a numerical score, the LLM judge generates a natural language explanation justifying its assessment. This interpretability is valuable for diagnosing specific failure modes within the pipeline and for iteratively refining system components.
 
-Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM judge assessed the generated answers across four key metrics.
+Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM judge assessed the generated answers across three key metrics.
 
 \begin{table}[ht]
     \centering
     \resizebox{\textwidth}{!}{%
-        \begin{tabular}{lcccccc}
+        \begin{tabular}{lcccc}
             \hline
-            \textbf{Condition}         & \textbf{Contextual Relevancy} & \textbf{Answer Relevancy} & \textbf{Faithfulness} & \textbf{Contextual Precision} & \\
+            \textbf{Condition}         & \textbf{Contextual Relevancy} & \textbf{Answer Relevancy} & \textbf{Faithfulness} \\
             \hline
-            Zero-shot Baseline         & 7\%                           & 38\%                      & 29\%                  & 42\%                            \\
-            Context-augmented Baseline & 15\%                          & 55\%                      & 62\%                  & 40\%                            \\
-            RAG                        & 16\%                          & 44\%                      & 52\%                  & 18\%                            \\
-            RAFT                       & 10\%                          & 45\%                      & 52\%                  & 15\%                            \\
+            Zero-shot Baseline         & 7\%                           & 38\%                      & 29\%                  \\
+            Context-augmented Baseline & 15\%                          & 55\%                      & 62\%                  \\
+            RAG                        & 16\%                          & 44\%                      & 52\%                  \\
+            RAFT                       & 10\%                          & 45\%                      & 52\%                  \\
             \hline
         \end{tabular}%
     }
