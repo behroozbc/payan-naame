@@ -1,8 +1,8 @@
 \section{RAFT Pipeline}
-
+As explained in the previous chapter, the RAFT pipeline consists of two parts: a RAG pipeline and a fine-tuning component. This section describes how each part of this method is constructed and which techniques are employed for each.
 The RAG pipeline is built from several components, such as search, prompt builder, and others.
 In this section, each design choice is examined and the rationale behind it is explained.
-The overview of the RAG pipeline on the diagram \ref{fig:rag-pipeline}.
+An overview of the RAG pipeline is presented in Figure~\ref{fig:rag-pipeline}.
 
 
 \begin{figure}[htbp]
@@ -82,22 +82,22 @@ is then applied.
 \subsection{Gather Prerequisites}
 
 Prerequisites are a critical aspect, as explained in detail in the introduction. Each item retrieved from the search is mapped to its specific prerequisites via the MathHub knowledge base. The
-prerequisites and their content are fetched for inclusion in the prompt. The purpose is to include prerequisites so that the LLM can explain them before addressing the user's question (RQ1).
+prerequisites and their content are fetched for inclusion in the prompt. The purpose of including prerequisites is to enable the LLM to explain them before addressing the user's question (RQ1).
 
-Also, the learner model's dimensions of understanding are fetched for every prerequisite. This is very important because it helps address RQ1.
+Additionally, the learner model's dimensions of understanding are fetched for every prerequisite. This is essential because it helps address RQ1.
 In the following steps, this is referred to as `prerequisites\_level\_documents`.
 The prerequisites are categorized into three sections based on the average value of Bloom's metrics. For beginners, all content should be explained. For medium-level learners, the explanation should be limited to two sentences. For experts, the prerequisites are skipped.
 \subsection{Gather Symbols}
-Each item retrieved from the search has some Symbols on it.
-The learner model's dimensions of understanding are fetched for every Symbol.
-This is a vital point because the model response should change based on the user's understanding of the topic.
-In the prompt, this is referred to as `symbol\_level'.
+Each item retrieved from the search contains associated symbols.
+The learner model's dimensions of understanding are fetched for every symbol.
+This is a vital point because the model's response should vary based on the user's understanding of the topic.
+In the prompt, this is referred to as `symbol\_level`.
 
 \subsection{Building the Prompt}
 
 Constructing the prompt is a critical step, as it must present the data in a structured manner that enables the model to comprehend the relationships between the various components. The prompt structure is as follows:
 \begin{quote}
-    You are a question-answering model for students. Please provide answers that are easy for students to understand.
+    You are a question-answering model for students. Please provide answers that are easy for students to understand.\\
     Use all material provided in the context.
     I provide the user's status regarding some prerequisites of the topic.
     If the user does not know some prerequisites, cover them before explaining the question to the user.
@@ -107,17 +107,32 @@ Constructing the prompt is a critical step, as it must present the data in a str
     \{ retrieved documents\}\\
     The symbols have understanding levels; if the user does not know them, please explain them, otherwise skip them:
     \{symbol\_level\}\\
-    This is the prerequisites' status and content; if the user does not know them, please add the content, otherwise skip them:
+    This is the prerequisites' status and content; if the user does not know them, please add the content, otherwise skip them:\\
     \{prerequisites\_level\_documents\}
 \end{quote}
 
 \section{Fine-tuning}
 
-The RAG pipeline described above is essential because the data varies significantly across courses. Fine-tuning the model is a big part of RAFT pipelines and makes it different from normal RAG.
-Nevertheless, fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
+The RAG pipeline described above is essential because the data varies significantly across courses. Fine-tuning the model is a major component of the RAFT pipeline and distinguishes it from standard RAG.
+Fine-tuning enables the model to produce responses with a consistent structure and to better interpret the learner model's structure.
 In this thesis, the QLoRA method is employed for fine-tuning.
 A dataset comprising questions, corresponding answers, and the learner model status was prepared for this purpose, with the questions sourced from the dataset.
 The model selected for fine-tuning is Google Gemma 4 E4B \cite{gemmateam2026gemma4technicalreport}.
 This is a small model with only 4 billion parameters.
-The model fine-tuned for one epoch and 20 steps on Fine-tuning dataset \ref{fine_tune_dataset}.
+The model was fine-tuned for one epoch and 20 steps on the fine-tuning dataset (Section~\ref{fine_tune_dataset}).
+The model was quantized to 8-bit precision and executed using Ollama. The loss log of the fine-tuning process is shown in Figure~\ref{plot:log_loss}.
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={Fine-tuning Loss},
+            xlabel={x},
+            ylabel={y},
+        ]
+            \addplot[blue, domain=0:5]{x^2};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The fine-tuning's loss for 20 steps on the fine-tuning dataset.}
+    \label{plot:log_loss}
+\end{figure}
