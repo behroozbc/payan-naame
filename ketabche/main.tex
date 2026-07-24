@@ -10,14 +10,17 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex}
 \usepackage{listings}
 \usepackage{csquotes}
+\usepackage{pgfplots}
 \addbibresource{kwarc.bib/kwarc.bib}
 \addbibresource{references.bib}
 \usepackage[bookmarksnumbered,bookmarksopen,colorlinks,urlcolor=gray,linkcolor=blue,citecolor=blue]{hyperref}
 \usepackage{bookmark}
+\pgfplotsset{compat=1.18}
 \usetikzlibrary {calc,positioning,shapes.misc,arrows.meta}
 \tikzset{terminal/.style={rectangle,draw,inner sep=2pt}}
 \input{preamble}   
@@ -30,6 +33,8 @@
 \maketitle{}
 \input{chapters/abstract.tex}
 \tableofcontents
+\listoffigures
+\listoftables
 
 
 \include{chapters/intro/main.tex}
