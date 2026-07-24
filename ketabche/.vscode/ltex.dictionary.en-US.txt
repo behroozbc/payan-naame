@@ -9,3 +9,4 @@ resonse
 TriprtieRAG
 TriprtieRAFT
 QLoRA
+Ollama
