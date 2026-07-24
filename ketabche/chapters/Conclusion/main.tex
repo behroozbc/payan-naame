@@ -1,23 +1,2 @@
 \chapter{Conclusion}
-\subsection{Future Work}
-\begin{itemize}
-      \item \textbf{Finding a more compact representation of FTML.}\\
-            FTML is an effective way to present LaTeX code on the web; however, it contains numerous HTML tags that are necessary for web rendering but superfluous for LLMs. These tags increase the content size unnecessarily, which becomes a significant issue when processing such content with LLMs. A crucial improvement to enhance the results of this thesis is developing a compact representation that reduces the amount of text fed into the model, thereby allowing more meaningful content to be processed within a smaller context window.
-
-      \item \textbf{User course selection to improve retrieval accuracy.}\\
-            Users should be able to select the relevant course to improve retrieval results, as some courses overlap in content. For example, AI1 and AI2 share certain topics, which can lead to retrieval errors: the system may retrieve material intended for AI2 in response to an AI1 question. Therefore, requiring the user to specify the course ensures that only content relevant to that specific course is retrieved.
-
-      \item \textbf{Application to other courses.}\\
-            This thesis focused exclusively on a limited set of courses within computer science. The proposed method should be applied to courses in other disciplines with a broader range of topics and materials to evaluate its generalizability.
-
-      \item \textbf{Application to image-oriented courses.}\\
-            A limitation of this thesis is that the selected courses were predominantly text-based and did not contain visual content requiring explanation. Multimodal RAG systems have demonstrated strong retrieval capabilities in both textual and visual spaces. Therefore, a promising direction for future research is applying these methods to image-based content, such as medical materials. For instance, in the medical domain, diagrams of anatomical structures often contain labeled images with arrows pointing to specific body parts. Leveraging multimodal systems and models for such content would be a valuable avenue for further investigation.
-
-      \item \textbf{Incorporating prerequisite relevance indicators for retrieved content.}\\
-            A limitation observed during this research was the absence of any mechanism to indicate the relevance level of prerequisites associated with retrieved materials. In some instances, the system identified a term as a prerequisite, yet that term bore no meaningful relation to the content under consideration. For example, in one case, the system flagged "word" as a prerequisite, despite its lack of relevance to the research context. As a result, many extraneous terms were erroneously designated as prerequisites. Future work should aim to develop a method that assigns a relevance score to each prerequisite, indicating its degree of pertinence---whether it is a primary prerequisite, a secondary one, or only tangentially related to the searched item. This would enable the model to prioritize genuinely relevant prerequisites and disregard those that are incidental or irrelevant.
-
-      \item \textbf{Validity of LLM-as-a-judge in educational contexts.}\\
-            One aspect of this thesis was the use of LLMs as judges for evaluation metrics. However, the validity of employing LLMs as judges in educational settings raises significant questions: How reliably can an LLM determine whether an answer is correct? To what extent can it assess the relevance and quality of a response? Future research should investigate the suitability of LLMs as evaluators in educational domains and whether they constitute a reliable choice for assessment.
-      \item \textbf{Experimentation with larger and more sophisticated models.}\\
-            A limitation of this study was the inability to conduct experiments with larger and more sophisticated models due to restricted access to high-performance computing (HPC) resources. Future research should apply the proposed method to models with a greater number of parameters to examine how the results scale and whether performance improves accordingly.
-\end{itemize}
+\input{chapters/Conclusion/sections/future_works.tex}
