@@ -1,4 +1,13 @@
-\section{Human as judge}
+\section{Human as Judge}
 
-A TA for the subject courses read a subset of generated answers,
+A teaching assistant for the subject courses reviewed a subset of generated answers,
 checking that the answers are valid, explain all concepts and information, and are free of any hallucinations. 
+The answers were then compared against the actual reference answers.\\
+
+Many answers merely summarized the prerequisites of the topics and avoided addressing the actual question. However, when the model did answer the question, the response was quite good---free of hallucinations or off-topic explanations---and only explained the concepts as defined in the prompt. One notable observation was that when the user demonstrated expert-level knowledge of the prerequisites, the model tended to avoid answering the question directly, instead stating that the user already understood everything, or attempting to end the conversation prematurely.
+
+An example of this behavior is observed in the RAFT method, as shown in Appendix~\ref{appendix:raft_model_answer}. The user asked, "How can I check if my logic formula is complete?" and had basic knowledge of all related concepts. The model correctly identified that completeness is a property of a logical system, not of a single formula, corrected the user's misconception, and explained the relevant prerequisites as defined for the user.
+
+Another example of how the model performs is presented in Appendix~\ref{appendix:raft_environments}. Here, the model was asked, "Briefly explain the difference between fully and partially observable environments. Give an example for the latter." The response only summarized the basic prerequisites added to the prompt, neglecting to address the actual question. However, in the chain-of-thought reasoning, the model recalled the question but then proceeded to elaborate further on the prerequisites, ultimately failing to answer the question and merely summarizing the prerequisites.
+
+One point that was mentioned in the LLM-as-a-Judge section but is better demonstrated in this experiment is that the model answers are significantly more consistent when using the RAFT method. In contrast, with the RAG method, the model sometimes only responds with an intent to use a tool, skips answering altogether, or attempts to call a web search despite no such tools being provided to the model. 
