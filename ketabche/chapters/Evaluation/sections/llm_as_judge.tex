@@ -2,11 +2,11 @@
 
 
 Using an LLM as a judge is an effective approach for evaluating generated answers and providing feedback on their quality.
-The judge LLM is a model with a larger number of parameters, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
+The judge LLM is a model with a larger parameter count, specifically 'deepseek-ai/DeepSeek-V4-Flash' \cite{deepseekai2026deepseekv4}.
 This method raises several concerns, as LLMs are not entirely trustworthy
 and do not provide explainable reasoning for their decisions.
 
-To compare the RAFT pipeline against baselines, we also introduce a RAG pipeline to evaluate the extent to which the fine-tuning phase of the RAFT pipeline influences the model and improves its results relative to the standard RAG pipeline.
+To compare the RAFT pipeline against the baselines, we also introduce a RAG pipeline to evaluate the extent to which the fine-tuning phase of the RAFT pipeline influences the model and improves its results relative to the standard RAG pipeline.
 
 For the answer relevance metric, an LLM was employed to compare the generated answer against the correct answer
 and the prerequisites of each question, enabling the model to verify whether all required concepts were adequately covered.
@@ -19,7 +19,7 @@ The evaluation framework employed in this study leverages LLM-as-a-judge to asse
 
 \textbf{Answer Relevancy} evaluates the degree to which the generated answer directly addresses the user's question. This metric examines whether the output contains information that is responsive to the query, avoiding extraneous or off-topic content. A high answer relevancy score reflects the system's ability to produce concise and targeted responses that meet the informational needs of the user.
 
-All three metrics are implemented as self-explaining LLM-Evals, meaning that in addition to producing a numerical score, the LLM judge generates a natural language explanation justifying its assessment. This interpretability is valuable for diagnosing specific failure modes within the pipeline and for iteratively refining system components.
+All three metrics are implemented as self-explaining LLM-Evals, meaning that, in addition to producing a numerical score, the LLM judge generates a natural language explanation justifying its assessment. This interpretability is valuable for diagnosing specific failure modes within the pipeline and for iteratively refining system components.
 
 Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM judge assessed the generated answers across three key metrics.
 
@@ -33,12 +33,12 @@ Table~\ref{tab:llm_judge_metrics} presents the evaluation results, where the LLM
             Zero-shot Baseline         & 7\%                           & 38\%                      & 29\%                  \\
             Context-augmented Baseline & 15\%                          & 55\%                      & 62\%                  \\
             RAG                        & 16\%                          & 44\%                      & 52\%                  \\
-            RAFT                       & 10\%                          & 45\%                      & 52\%                  \\
+            RAFT                      & 10\%                          & 45\%                      & 52\%                  \\
             \hline
         \end{tabular}%
     }
     \caption{LLM-as-judge scores. Higher
-        scores are better;}
+        scores are better.}
     \label{tab:llm_judge_metrics}
 \end{table}
 
@@ -48,6 +48,8 @@ A notable observation is that the generated answers often fail to pass the answe
 
 To further investigate this issue, an additional experiment was conducted in which the same question was posed to the fine-tuned model without providing any prior context or instructions regarding academic tone. The objective was to assess the model's ability to answer the question independently, without any guidance or preferences. Interestingly, the resulting answers exhibited a markedly improved academic tone and overall quality compared to those generated with context and prerequisite information. This suggests that, in certain cases, providing additional context may inadvertently lead the model away from producing a direct and well-formulated response, and that a standalone question without supplementary instructions can yield superior results.
 
-However, relying solely on a fine-tuned model is not a sufficient solution for this approach, as the degree of customization required as mentioned on research questions at the beginning. Therefore, a mechanism that can be adapted at runtime is necessary, rather than relying on a fixed model from the outset.
+A notable advantage of the RAFT method is that the generated answers are more coherent and exhibit less variation during the generation process. In contrast, the RAG method sometimes produces answers that are entirely incomplete or drastically different from one attempt to another, thereby increasing the likelihood of errors.
 
-Another factor contributing to this issue is that the model is relatively small and has a very limited context window. As observed, when only context-augmented input is provided for the baseline, the model's answers become well-structured and coherent. However, when additional content is supplied, the increased volume of information causes the model to become confused, leading it to default to summarizing the text rather than generating a direct response.
+However, relying solely on a fine-tuned model is not a sufficient solution for this approach, given the degree of customization required, as mentioned in the research questions at the outset. Therefore, a mechanism that can be adapted at runtime is necessary, rather than relying on a fixed model from the beginning.
+
+Another factor contributing to this issue is that the model is relatively small and has a very limited context window. As observed, when only context-augmented input is provided for the baseline, the model's answers become well-structured and coherent. However, when additional content is supplied, the increased volume of information causes the model to become confused, leading it to default to summarizing the text rather than producing a direct response.
