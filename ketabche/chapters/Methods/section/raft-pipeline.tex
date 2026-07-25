@@ -120,7 +120,7 @@ A dataset comprising questions, corresponding answers, and the learner model sta
 The model selected for fine-tuning is Google Gemma 4 E4B \cite{gemmateam2026gemma4technicalreport}.
 This is a small model with only 4 billion parameters.
 The model was fine-tuned for one epoch and 20 steps on the fine-tuning dataset (Section~\ref{fine_tune_dataset}).
-The model was quantized to 8-bit precision and executed using Ollama. The loss log of the fine-tuning process is shown in Figure~\ref{plot:log_loss}.
+The model was quantized to 8-bit precision and executed using Ollama with Cot is enabled. The loss log of the fine-tuning process is shown in Figure~\ref{plot:log_loss}.
 
 \begin{figure}[htbp]
     \centering
