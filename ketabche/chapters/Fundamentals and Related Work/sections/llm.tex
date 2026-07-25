@@ -29,3 +29,19 @@ While pre-trained LLMs exhibit strong language understanding, their outputs are 
 \subsection{Limitations}
 
 Despite their capabilities, LLMs suffer from several well-documented limitations. First, they exhibit a tendency to \emph{hallucinate}---generating content that is fluent and superficially plausible but factually incorrect \cite{ji2023survey, huang2023survey}. Second, their knowledge is frozen at the time of pre-training, rendering them unable to incorporate new or domain-specific information without costly re-training or fine-tuning. Third, the parametric nature of their knowledge makes it difficult to verify the provenance of generated claims, as the model does not cite external sources by default. These limitations motivate the integration of LLMs with external retrieval mechanisms, a topic explored in the Retrieval-Augmented Generation section of this chapter.
+
+\subsection{Chain-of-Thought Reasoning}
+
+A notable advancement in eliciting sophisticated reasoning from LLMs is the \emph{chain-of-thought} (CoT) prompting technique, introduced by Wei et al.\ \cite{wei2022chain}. This method instructs the model to generate intermediate reasoning steps before arriving at a final answer, thereby decomposing complex multi-step problems into a sequence of manageable sub-tasks. Rather than producing a direct answer, the model is prompted to articulate a logical progression---for instance, by including the phrase ``Let us think step by step'' \cite{kojima2022large}---which mirrors the human cognitive process of deliberative reasoning.
+
+Formally, given an input query \(q\) and a set of exemplars \(\mathcal{E} = \{(q_i, r_i, a_i)\}_{i=1}^{k}\), where each exemplar consists of a question \(q_i\), a reasoning chain \(r_i\), and an answer \(a_i\), the model generates a reasoning chain \(\hat{r}\) and a final answer \(\hat{a}\) autoregressively:
+
+\[
+\hat{r}, \hat{a} = \arg\max_{r,a} P(r, a \mid q, \mathcal{E}; \theta).
+\]
+
+The reasoning chain \(\hat{r}\) serves as an intermediate scaffold that guides the model toward the correct answer by reducing the cognitive load of a single-step prediction.
+
+The effectiveness of CoT reasoning has been demonstrated across a wide range of arithmetic, commonsense, and symbolic reasoning tasks \cite{wei2022chain, wang2023selfconsistency}. Moreover, subsequent work has extended this paradigm in several directions. \emph{Self-consistency} \cite{wang2023selfconsistency} samples multiple reasoning paths and selects the most consistent answer via marginalisation, thereby improving robustness against stochastic variations in generated chains. \emph{Tree-of-Thoughts} (ToT) \cite{yao2023tree} generalises the linear chain into a tree structure, enabling the model to explore multiple reasoning branches and perform deliberate backtracking when a branch proves unfruitful. Similarly, \emph{Graph-of-Thoughts} (GoT) \cite{besta2024graph} further extends this concept by modelling reasoning steps as a directed graph, allowing for aggregation and refinement of partial solutions.
+
+Despite its strengths, CoT prompting is not without limitations. The quality of the generated reasoning chain is contingent upon the model's underlying capabilities; if the model lacks the requisite knowledge, the chain may propagate errors rather than mitigate them. Furthermore, CoT incurs additional computational cost due to the generation of extended token sequences, and its benefits are most pronounced in tasks that genuinely require multi-step reasoning, while being marginal for simpler queries \cite{wei2022chain}. Nevertheless, CoT remains a cornerstone technique for enhancing the reasoning fidelity of LLMs and is particularly relevant to retrieval-based systems, where the ability to reason over retrieved evidence is paramount.
