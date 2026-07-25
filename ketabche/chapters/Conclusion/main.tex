@@ -1,2 +1,30 @@
 \chapter{Conclusion}
+
+This thesis focused on the design and implementation of a personalized Retrieval-Augmented Fine-Tuning (RAFT) method for question answering and student response evaluation in educational environments. The primary objective was to develop and personalize a system tailored to each student, capable of delivering customized answers based on their individual knowledge background. This final chapter summarizes the work, revisits the research questions with answers grounded in our findings, and reflects on the journey undertaken throughout this research.
+
+\section{Summary of Contributions}
+
+This thesis makes the following key contributions:
+
+\begin{enumerate}
+    \item \textbf{A dataset of student questions.} This dataset comprises questions collected from students via forum requests. Each question was subsequently answered with accurate and verified knowledge to ensure the completeness and reliability of the dataset.
+
+    \item \textbf{A dataset of question-answer pairs with knowledge background annotations.} This dataset pairs each question with its corresponding answer and the student's knowledge background, making it suitable for the fine-tuning stage. It contains over 150 entries.
+
+    \item \textbf{A complete RAFT and RAG pipeline.} As a result of this work, both a  RAG pipeline and a RAFT pipeline have been developed. These pipelines can be deployed on full-scale systems, such as the ALEA platform, for testing with students. The RAG pipeline can also be applied to more advanced models to evaluate how results vary with model capacity.
+\end{enumerate}
+
+\section{Revisiting the Research Questions}
+
+\begin{itemize}
+    \item \textbf{RQ1} \ref{RQ1}: How can the system dynamically adapt its responses to align with a student's current knowledge level and learning progress? The Raft methods show that system can find in the level of understanding and change the the answer based on the knowledge base of the user however it's not completely solid foundation that a model can answer the user student completely.
+    \item \textbf{RQ2} \ref{RQ2}: How can course-specific content and pedagogical materials be effectively integrated to ensure domain-relevant and accurate responses? The model after the fine tuning can understand better and answer become much more inconsistent and the level of understanding the course specific content it's become much better after fine tuning a step.
+    \item \textbf{RQ3} \ref{RQ3}: What techniques and architectural strategies can be employed to effectively reduce hallucinations in large language model-based tutoring systems? The fine tuning and the RAF pipeline show the model can understand better and stop effectively the hallucination in the model.
+    \item \textbf{RQ4} \ref{RQ4}: How can the system generate more accurate, context-aware, and educationally valuable answers that support meaningful learning? Answer for this is visibility yes because the model after becoming the only the context that were baseline that anthropic change and become much more coherent and based on the context which is very powerful things and very good for result in the other hand in the Rafipeline and the rag personal rag pipeline and the model understand the prerequisites And explain the prerequisites in the topic.
+\end{itemize}
+
+\section{Limitations}
+
+A significant limitation encountered during the writing of this thesis was the sudden and unforeseen restriction of access to high-performance computing (HPC) resources in Sudan, which occurred without prior notice. As a result, all work and experimental results stored on the HPC system were lost. This incident took place approximately three weeks prior to the submission date, and recreating the results using alternative tools that lacked the necessary processing power, GPU access, and model execution capabilities proved exceedingly challenging on a short time. This was an extremely difficult and regrettable experience that substantially impacted the progress of this research. Only the datasets was safe from this catastrophic happen because they storages under my own PC and I didn't use HPC and to create them however the augmentation of questions that I want try in the process was lost.
+
 \input{chapters/Conclusion/sections/future_works.tex}
