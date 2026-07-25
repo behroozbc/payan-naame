@@ -1,6 +1,6 @@
 \section{Retrieval-Augmented Generation}
 
-Retrieval-Augmented Generation (RAG) is a paradigm that combines parametric knowledge stored in large language models with non-parametric knowledge retrieved from external corpora at inference time \cite{lewis2020retrieval}. By grounding the generation process in retrieved evidence, RAG mitigates two fundamental shortcomings of standalone LLMs: the tendency to hallucinate factually incorrect content and the inability to incorporate up-to-date or domain-specific information that lies beyond the model's training data \cite{gao2023retrieval, fan2024retrieval}.
+Retrieval-Augmented Generation (RAG) is a paradigm that combines parametric knowledge stored in large language models with non-parametric knowledge retrieved from external corpora at inference time \cite{lewis2020retrieval}. By grounding the generation process in retrieved evidence, RAG mitigates two fundamental shortcomings of standalone LLMs: the tendency to hallucinate factually incorrect content and the inability to incorporate up-to-date or domain-specific information that lies beyond the model's training data \cite{gao2023retrieval}.
 
 \subsection{Architectural Overview}
 
@@ -48,4 +48,4 @@ The application of RAG to educational contexts is a growing area of research. By
 
 \subsection{Limitations and Challenges}
 
-Despite its advantages, RAG introduces several challenges. The retrieval module may return irrelevant or noisy documents, which can mislead the generator \cite{fan2024retrieval}. Additionally, the latency introduced by the retrieval step can be prohibitive for real-time applications. Recent research has focused on improving retrieval precision through query rewriting, document re-ranking, and adaptive retrieval thresholds \cite{ram2023retrieval, shao2023retrieval}.
+Despite its advantages, RAG introduces several challenges. The retrieval module may return irrelevant or noisy documents, which can mislead the generator. Additionally, the latency introduced by the retrieval step can be prohibitive for real-time applications. Recent research has focused on improving retrieval precision through query rewriting, document re-ranking, and adaptive retrieval thresholds \cite{ram2023retrieval, shao2023retrieval}.
