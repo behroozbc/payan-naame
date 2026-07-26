@@ -80,6 +80,14 @@ My thesis aims to address and solve these limitations by designing a system that
 ---
 src: ./pages/datasets.md
 ---
+
+---
+src: ./pages/baseline.md
+---
+
+---
+src: ./pages/raft-pipeline.md
+---
 ---
 
 ## ✅ What I have done so far! 
@@ -200,6 +208,8 @@ For an agent to be "intelligent," it needs a way to represent the world. Descrip
 In summary: While a standard AI (like a simple calculator) just processes a formula, an AI Agent uses a knowledge base (often built with the logic seen in your texts) to perceive a situation and act autonomously to solve a problem.
 ---
 
+---
+
 ## Remaining Tasks
 
 <v-clicks depth=2>
@@ -207,10 +217,7 @@ In summary: While a standard AI (like a simple calculator) just processes a form
 - Evaluating my results.
     - Human review: instructor/TA rubric
     - LLM as judge: does the answer align with retrieved fragments?
-- Try the RAFT method
-    - Prepare a small dataset with questions and answers.
-    - Fine-Tuning the model.
-    - compare RAG results with new Results.
+- Compare RAG results with fine-tuned RAFT results.
 </v-clicks>
 
 
