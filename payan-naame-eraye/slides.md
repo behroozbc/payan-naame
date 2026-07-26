@@ -92,6 +92,11 @@ src: ./pages/raft-pipeline.md
 ---
 src: ./pages/evaluation.md
 ---
+
+---
+src: ./pages/conclusion.md
+---
+
 ---
 
 ## ✅ What I have done so far! 
