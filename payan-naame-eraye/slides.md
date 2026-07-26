@@ -1,6 +1,6 @@
 ---
 theme: academic
-title: Phd Interview behrooz
+title: Master thesis
 transition: slide-left
 # enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
@@ -12,12 +12,12 @@ coverBackgroundUrl: /intro.png
 coverAuthor: [behrooz bozorgchamy]
 ---
 
-# TripartiteRAG 
+# TripartiteRAFT 
 ---
 layout: two-cols-header
 ---
 
-# TripartiteRAG
+# TripartiteRAFT
 <v-click>
 
 ## Problem Statement & Motivation
@@ -75,75 +75,16 @@ My thesis aims to address and solve these limitations by designing a system that
 - Reduces hallucinations.
 - Provides more accurate, context‑aware answers.
 </v-clicks>
+
+
 ---
-layout: two-cols-header
+src: ./pages/datasets.md
 ---
-
-### Data Structure
-
-::left::
-<v-click>
-```mermaid
-flowchart TD
-    symbol["Symbol(Topic)"]
-    definition["Definition"]
-    explain["Explain"]
-    LM["Learner Model"]
-    prerequisites["Prerequisites(symbol)"]
-    symbol---explain
-    symbol---definition
-    LM-.-symbol
-    prerequisites-->symbol
-```
-</v-click>
-::right::
-<v-clicks>
-
-- All symbols and their relationships are stored in GraphDB, and data retrieval is possible only via SPARQL queries.
-- The learner model is a separate system that predicts a student’s level of understanding based on their interactions with quizzes and problem‑solving tasks.
-- The learner model data should get online, it is different for every user and changes frequently.
-- You can see the whole system on the [ALeA system](https://alea.education/).
-</v-clicks>
----
-
-## Leaner Model
-
-Leaner model is a probably base model tried to predict student understanding by their activity on quizzes and practice questions.
-It calculate six expect of confidences of a topic. 
-
-It fully complies with the European Union's privacy laws.
-
-
-```ts
-{
-      "concept": "http://mathhub.info?a=FTML/math&p=propositions&m=prop&s=false",
-      "confidences": {
-        "Analyse": 0,
-        "Apply": 0,
-        "Create": 0,
-        "Evaluate": 0,
-        "Remember": 0.8213587457090796,
-        "Understand": 0
-      }
-    },
-```
 ---
 
 ## ✅ What I have done so far! 
 
-### Create a small dataset of question
 
-<v-clicks>
-
-- Questions from AI2, AI1, and the SMAI content course are being added to a dataset.
-- The dataset currently contains roughly 20 questions.
-- In the coming weeks, more details and additional questions on these topics will be added.
-- Some questions in the dataset already have answers, while others do not.
-- The system is personalized for every person, which is why not all questions have fixed/standard answers.
-- The instructor can specify topics or elements to include (e.g., “include this topic”), but cannot dictate strict, uniform answers for everyone.
-
-</v-clicks>
----
 
 ### Indexing
 <v-switch>
