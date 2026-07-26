@@ -127,10 +127,36 @@ The model was quantized to 8-bit precision and executed using Ollama with Cot is
     \begin{tikzpicture}
         \begin{axis}[
             title={Fine-tuning Loss},
-            xlabel={x},
-            ylabel={y},
+            xlabel={Step},
+            ylabel={Loss},
+            xmin=1, xmax=20,
+            ymin=0.5, ymax=2.1,
+            grid=both,
+            grid style={line width=.1pt, draw=gray!30},
+            major grid style={line width=.2pt, draw=gray!50},
         ]
-            \addplot[blue, domain=0:5]{x^2};
+            \addplot[blue, mark=*] coordinates {
+                (1, 2.003441)
+                (2, 2.003441)
+                (3, 2.007069)
+                (4, 1.984175)
+                (5, 1.919047)
+                (6, 1.749491)
+                (7, 1.451586)
+                (8, 1.220225)
+                (9, 1.118523)
+                (10, 1.061247)
+                (11, 1.003085)
+                (12, 0.947343)
+                (13, 0.890616)
+                (14, 0.834863)
+                (15, 0.783133)
+                (16, 0.735035)
+                (17, 0.695274)
+                (18, 0.664425)
+                (19, 0.638163)
+                (20, 0.622163)
+            };
         \end{axis}
     \end{tikzpicture}
     \caption{The fine-tuning's loss for 20 steps on the fine-tuning dataset.}
