@@ -10,3 +10,4 @@ TriprtieRAG
 TriprtieRAFT
 QLoRA
 Ollama
+Tripartite-GraphRAG
