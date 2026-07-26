@@ -1,0 +1,14 @@
+\section{State-of-the-art}
+\label{sec:state-of-the-art}
+The intersection of large language models, retrieval-augmented generation, and personalised education has seen rapid advancement in recent years. This section surveys the most recent and relevant works that define the current state of the art.
+
+\subsection{Tripartite-GraphRAG via Plugin Ontologies}
+
+This work \cite{banf2025tripartitegraphragpluginontologies} introduces Tripartite-GraphRAG for medical domain, a retrieval-augmented generation framework that addresses two persistent limitations in standard RAG pipelines: the reliance on embedding-based similarity for chunk selection, which produces noisy or incomplete prompts, and the scalability challenges of entity-based knowledge graph construction, such as entity resolution and deduplication.
+
+The core contribution is a three-node knowledge graph connecting domain-specific objects of investigation (e.g., a patient anamnesis), a curated plugin ontology of concepts (e.g., clinical terms), and text chunks from source documents. At construction time, an LLM performs a concept-anchored pre-analysis of each text chunk, extracting and storing only information relevant to each concept as edge properties — an "information-preserving pre-compression" that discards textual noise while retaining granular, query-relevant content. This design avoids entity resolution entirely because the ontology provides stable, predefined concept nodes rather than extracted entities.
+
+For inference, the authors formulate prompt assembly as an unsupervised node classification problem on a transformed graph. Each candidate text chunk is scored via cosine similarity between the object–concept and concept–chunk edge embeddings, and inclusion is decided against a concept-specific empirical distribution $P_c$ of these scores, controlled by hyperparameter $\alpha$. A secondary parameter $\beta$ allows co-occurring concepts within the same text chunk to influence each other's selection, inspired by Markov Random Field principles.
+
+This method inspires the present work in the following way: we conceptualise the personalised information of each student as a plug-and-play component within the prompt system, while the remaining parts of the content — namely the MathHub repository and the trunking system — remain identical for every student. This design principle played a significant role in shaping this thesis.
+
