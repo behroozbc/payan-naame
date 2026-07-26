@@ -93,7 +93,8 @@ This thesis focused on the design and implementation of a personalized **Retriev
 </v-click>
 
 ---
-
+layout: cover
+---
 ## Future Work
 
 ---

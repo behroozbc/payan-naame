@@ -2,14 +2,14 @@
 
 This work contains three datasets
 
-- Mathhub dataset
+- Course dataset
 - Students questions and answer dataset
 - Fine-tune dataset
 
 ---
 layout: two-cols-header
 ---
-### Mathhub dataset
+### Course dataset
 
 ::left::
 <v-click>
@@ -29,6 +29,7 @@ flowchart TD
 ::right::
 <v-clicks>
 
+- The content of Mathhub.
 - All symbols and their relationships are stored in GraphDB, and data retrieval is possible only via SPARQL queries.
 - The learner model is a separate system that predicts a student’s level of understanding based on their interactions with quizzes and problem‑solving tasks.
 - The learner model data should get online, it is different for every user and changes frequently.
@@ -39,7 +40,7 @@ flowchart TD
 ## Leaner Model
 
 Leaner model is a probably base model tried to predict student understanding by their activity on quizzes and practice questions.
-It calculate six expect of confidences of a topic. 
+It calculates six expect of bloom's metric confidences of a topic. 
 
 It fully complies with the European Union's privacy laws.
 

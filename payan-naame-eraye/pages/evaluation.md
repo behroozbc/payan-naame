@@ -143,7 +143,7 @@ Using an LLM as a judge is an effective approach for evaluating generated answer
 
 ---
 
-### Additional Experiment
+### Additional Observation
 
 <v-click>
 
@@ -159,7 +159,7 @@ The same question was posed to the fine-tuned model **without any prior context 
 
 <v-click>
 
-> This suggests that, in certain cases, providing additional context may inadvertently lead the model away from producing a direct and well-formulated response.
+> This suggests that fine-tuning helps the model produce better-structured and more coherent responses. However, this alone does not fulfill the thesis objective, as the primary goal is to enable customization through a runtime-adaptable mechanism rather than relying solely on fine-tuning.
 
 </v-click>
 
@@ -209,7 +209,7 @@ A teaching assistant for the subject courses reviewed a subset of generated answ
 
 <v-click>
 
-> User asked: *"How can I check if my logic formula is complete?"* (expert-level knowledge of prerequisites)
+> User asked: *"How can I check if my logic formula is complete?"* (basic-level knowledge of prerequisites)
 
 </v-click>
 
