@@ -75,6 +75,44 @@ Text search is critical for retrieving relevant content and reducing hallucinati
 
 ---
 
+### How vector database built?
+#### Indexing
+<v-switch>
+<template  #1>
+
+```mermaid
+flowchart LR
+    Data["Data"]
+    Data
+```
+
+#### Data
+- The course materials and content related to each section, along with the UUID.
+</template >
+
+<template #2>
+```mermaid 
+flowchart LR
+    Data["Data"]
+    Process["Chunking"]
+    Data-->Process
+```
+</template>
+<template #3>
+```mermaid 
+flowchart LR
+    Data["Data"]
+    Process["Chunking"]
+    Storage
+    Data-->Process-->Storage
+```
+</template>
+</v-switch>
+
+
+
+---
+
 ### Lexical Search
 
 <v-clicks>
