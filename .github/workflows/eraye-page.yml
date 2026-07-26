@@ -35,6 +35,7 @@ jobs:
       run: |
         npm i -g pnpm
         pnpm install
+        pnpm approve-builds
         pnpm run-script build-gh
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
