@@ -119,7 +119,7 @@ In this thesis, the QLoRA method is employed for fine-tuning.
 A dataset comprising questions, corresponding answers, and the learner model status was prepared for this purpose, with the questions sourced from the dataset.
 The model selected for fine-tuning is Google Gemma 4 E4B \cite{gemmateam2026gemma4technicalreport}.
 This is a small model with only 4 billion parameters.
-The model was fine-tuned for one epoch and 20 steps on the fine-tuning dataset (Section~\ref{fine_tune_dataset}).
+The model was fine-tuned for one epoch and 20 steps on the fine-tuning dataset (Section~\ref{fine_tune_dataset}). If training continue after the 20 the model become overfit to the data and last a variety of the answer.
 The model was quantized to 8-bit precision and executed using Ollama with Cot is enabled. The loss log of the fine-tuning process is shown in Figure~\ref{plot:log_loss}.
 
 \begin{figure}[htbp]
