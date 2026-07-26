@@ -88,6 +88,10 @@ src: ./pages/baseline.md
 ---
 src: ./pages/raft-pipeline.md
 ---
+
+---
+src: ./pages/evaluation.md
+---
 ---
 
 ## ✅ What I have done so far! 
