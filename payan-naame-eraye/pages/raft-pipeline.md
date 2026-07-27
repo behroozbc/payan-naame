@@ -1,6 +1,9 @@
 ## RAFT Pipeline
 
+The reason RAFT is chosen for this task is that the RAFT pipeline combines the advantages of both fine-tuning and RAG pipelines, integrating retrieved content into the model while providing a customizable technique.
+
 The RAFT pipeline consists of two main parts:
+
 
 <v-clicks depth="2">
 
