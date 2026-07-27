@@ -6,7 +6,7 @@ This thesis focused on the design and implementation of a personalized **Retriev
 
 - Primary objective: Develop and personalize a system tailored to each student
 - Deliver customized answers based on their **individual knowledge background**
-- This final chapter summarizes the work and revisits the research questions
+<!-- - This final chapter summarizes the work and revisits the research questions -->
 
 </v-clicks>
 
@@ -110,6 +110,8 @@ layout: cover
 </v-clicks>
 
 ---
+hide: false
+---
 
 ### User Course Selection
 
@@ -129,7 +131,7 @@ layout: cover
 
 - This thesis focused on a limited set of **computer science** courses
 - Should be applied to **other disciplines** with broader topics to evaluate generalizability
-- Particularly promising: **image-oriented courses** (e.g., medical diagrams with labeled anatomical structures)
+- Add more Multimodal: **image-oriented courses** (e.g., medical diagrams with labeled anatomical structures)
 - Multimodal RAG systems have demonstrated strong retrieval in both textual and visual spaces
 
 </v-clicks>
@@ -186,3 +188,5 @@ layout: cover
 - Future work should focus on **versioned snapshots** and **official client libraries**
 
 </v-clicks>
+
+

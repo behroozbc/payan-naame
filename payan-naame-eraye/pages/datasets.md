@@ -78,7 +78,7 @@ It fully complies with the European Union's privacy laws.
 <v-clicks>
 
 - Contains one hundred and fifty question and answer pairs.
-- Questions are set based on the student's understanding level (level three students were randomly selected to answer).
+- Questions are set based on the student's understanding level (three students were randomly selected to answer).
 - All answers include the prerequisites of the topic as well as the actual answer.
 
 </v-clicks>

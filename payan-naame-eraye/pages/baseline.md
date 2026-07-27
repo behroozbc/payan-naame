@@ -16,7 +16,7 @@ To evaluate the effectiveness of the proposed approach, two baseline methods are
 <v-clicks>
 
 - Queries the LLM **directly** without providing any external context
-- Assesses the model's **intrinsic knowledge** — how much it already knows about the topic by default
+- Assesses the model's **own knowledge** — how much it already knows about the topic by default
 - No supplementary information is given to the model
 
 </v-clicks>
@@ -48,7 +48,7 @@ User query:
 
 - Provides the LLM with **context retrieved** by the search pipeline
 - Constitutes a simple **Retrieval-Augmented Generation (RAG)** approach
-- The model is supplied with relevant documents but **no mechanism** exists to tailor the response to the individual user's knowledge state
+- The model is supplied only with relevant documents.
 
 </v-clicks>
 

@@ -84,7 +84,7 @@ My thesis aims to address and solve these limitations by designing a system that
 <v-clicks>
 
 - **RQ1**: How can the system dynamically adapt its responses to align with a student's current knowledge level and learning progress?
-- **RQ2**: How can course-specific content and pedagogical materials be effectively integrated to ensure domain-relevant and accurate responses?
+- **RQ2**: How can course-specific content be effectively integrated to ensure domain-relevant and accurate responses?
 - **RQ3**: What techniques and architectural strategies can be employed to effectively reduce hallucinations in large language model-based tutoring systems?
 - **RQ4**: How can the system generate more accurate, context-aware, and educationally valuable answers that support meaningful learning?
 </v-clicks>
@@ -110,3 +110,8 @@ src: ./pages/evaluation.md
 src: ./pages/conclusion.md
 ---
 
+---
+layout: cover
+---
+
+# Thanks

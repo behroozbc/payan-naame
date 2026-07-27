@@ -25,7 +25,7 @@ Before examining the results of the Tripartite RAFT pipeline, it is essential to
 
 ### Illustrative Example — Zero-shot Baseline
 
-Question: *"What is an AI Agent?"* answered by **Google Gemma 4 E4B** without any context.
+Question: *"What is AI Agent?"* answered by **Google Gemma 4 E4B** without any context.
 
 <v-clicks>
 
@@ -37,7 +37,7 @@ Question: *"What is an AI Agent?"* answered by **Google Gemma 4 E4B** without an
 
 <v-click>
 
-> These issues collectively demonstrate that LLMs, when operating without domain-specific contextual grounding, are prone to generating responses that are inaccurate, irrelevant, or misleading. This underscores the necessity of a retrieval-augmented framework.
+> These issues collectively demonstrate that LLMs, when operating without domain-specific contextual grounding, are prone to generating responses that are inaccurate, irrelevant, or misleading. This underscores the importance of a retrieval-augmented framework.
 
 </v-click>
 
@@ -117,7 +117,7 @@ Using an LLM as a judge is an effective approach for evaluating generated answer
 **Key observations:**
 
 - Context-augmented baseline shows **marked improvement** in answer relevancy (38% → 55%) and faithfulness (29% → 62%)
-- RAG and RAFT scores are **comparable**, but RAFT answers are **more coherent and consistent**
+- RAG and RAFT scores are **same**, but RAFT answers are **more coherent and consistent**
 
 </v-click>
 
@@ -281,8 +281,11 @@ Embedding models play a critical role in RAG and RAFT pipelines, as they directl
 - Multiple embedding models were evaluated to determine which achieves the **best retrieval quality**
 - Different embedding **dimensions** were investigated for their effect on retrieval score
 
+- Embedding models with dimensions **exceeding 1000** tend to produce **degraded retrieval performance**
 </v-clicks>
 
+---
+hide: true
 ---
 
 ### Embedding Models — Key Finding
@@ -308,13 +311,13 @@ Embedding models play a critical role in RAG and RAFT pipelines, as they directl
 | Aspect | Finding |
 |--------|---------|
 | **Baseline** | LLMs without context produce inaccurate, irrelevant, or misleading answers |
-| **Context-augmented** | Improves faithfulness and relevancy, but still lacks precision |
+| **Context-augmented** | Improves faithfulness and relevancy, but still lacks prerequisites |
 | **LLM as Judge** | RAFT answers are more coherent and consistent than RAG |
 | **Human as Judge** | RAFT produces consistent, hallucination-free answers when it answers directly |
 | **Key Challenge** | Model tends to summarize prerequisites instead of answering the question |
 
-<v-click>
+<!-- <v-click>
 
 > The evaluation demonstrates that the Tripartite RAFT pipeline improves consistency and reduces hallucinations, but further work is needed to ensure the model consistently addresses the user's actual question rather than defaulting to prerequisite summarization.
 
-</v-click>
+</v-click> -->
